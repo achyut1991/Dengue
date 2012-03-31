@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="aboutusTextview1">X-Dengue</string>
+	<string name="aboutusTextview2">0.0.0.0</string>
+	<string name="aboutusTextview3">Smart Communities Pte Ltd.</string>
+    <string name="aboutusTextview4">X-Dengue: warning you and your loved ones when Dengue is close by …</string>
+    <string name="aboutusTextview5">X-Dengue is a free public service project provided by SmartCommunities Pte Ltd in collaboration with the NEA to raise the general public’s awareness of dengue clusters, health risks and prevention through location-based, individual SMS and email alerts.</string>
+	<string name="aboutusTextview6">X-Dengue delivers personal, real time notifications about known Dengue fever clusters near your predefined locations such as home, school, work as well as your current location using the location info of your Android phone.</string>
+	<string name="aboutusTextview7">With this information you can take immediate action to prevent the spread of Dengue fever and protect yourselves and your loved ones.</string>
+	<string name="aboutusTextview8">Please tell your friends and neighbors about X-Dengue and let us know your feedback, questions or suggestions</string>
+	<string name="aboutusTextview9">(info@x-dengue.com)</string>
+	<string name="aboutusTextview10">Regards</string>
+	<string name="aboutusTextview11">Smart Communities Pte Ltd</string>
+</resources>

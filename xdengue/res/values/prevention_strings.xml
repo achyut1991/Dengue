@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="preventionTextview1">Dengue fever is the most common mosquito borne viral disease in the world. There is no drug for Dengue fever and the disease can be life threatening.</string>
+	<string name="preventionTextview2">To prevent the spread of dengue fever we must prevent the breeding of Aedes mosquitos. It prefers to breed in clean stagnent water found in and around our homes.</string>
+	<string name="preventionTextview3">This infomation enables you to take immediate action to prevent mosquitoes breeding in your home and neighbourhood and protect yourselves and your loved ones from Dengue fever.</string>    
+	<string name="preventionTextview4">Personal Protection</string>
+	<string name="preventionTextview5">10 Minutes Mozzie Wipeout</string>
+	<string name="preventionTextview6">Potential Breeding Sites</string>  
+</resources>

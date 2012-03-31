@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/navaigationbackground"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/preventionTextView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2.5dp"
+        android:text="@string/preventionTextview1"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/preventionTextView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2.5dp"
+        android:text="@string/preventionTextview2"
+        android:textColor="@color/white" />
+    
+    <TextView
+        android:id="@+id/preventionTextView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2.5dp"
+        android:textColor="@color/white" 
+        android:text="@string/preventionTextview3" />
+
+    <LinearLayout
+        android:id="@+id/linearlayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/personalProtectionButton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_margin="2.5dp"
+            android:layout_weight="1"
+            android:background="@drawable/noiconbutton"
+            android:textColor="@color/white"
+            android:text="@string/preventionTextview4" />
+
+        <Button
+            android:id="@+id/wipeoutButton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_margin="2.5dp"
+            android:layout_weight="1"
+            android:background="@drawable/noiconbutton"
+            android:text="@string/preventionTextview5" 
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/breedingSitesButton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_margin="2.5dp"
+            android:layout_weight="1"
+            android:background="@drawable/noiconbutton"
+            android:textColor="@color/white"
+            android:text="@string/preventionTextview6" />
+    </LinearLayout>
+
+</LinearLayout>

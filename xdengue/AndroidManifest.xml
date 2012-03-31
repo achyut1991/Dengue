@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.smartcommunities.xdengue"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="8" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:icon="@drawable/xdenguicon57x57"
+        android:label="@string/app_name" >
+        <activity
+            android:label="@string/app_name"
+            android:name=".XdengueActivity" >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+		<activity android:name="homeActivity" android:label="X-Dengue" android:launchMode="standard"></activity>
+        <activity android:name="aboutUsActivity" android:label="About X-Dengue" android:launchMode="standard"></activity>
+        <activity android:name="preventionActivity" android:label="Dengue Prevention" android:launchMode="standard"></activity>
+        <activity android:label="Personal Protection" android:name="personalProtectionActivity" android:launchMode="standard"></activity>
+        <activity android:launchMode="standard" android:label="Breeding Sites" android:name="breedingSitesActivity"></activity>
+        <activity android:launchMode="standard" android:label="Mozzie Wipe-out" android:name="mozzieWipeoutActivity"></activity>
+        <activity android:name="loginActivity" android:launchMode="standard" android:label="login"></activity>
+        <activity android:name="registerActivity" android:launchMode="standard" android:label="register"></activity>
+    </application>
+
+</manifest>

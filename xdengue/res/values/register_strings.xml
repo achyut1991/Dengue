@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fname_error">FirstName required</string>
+    <string name="lname_error">Last Name required</string>
+    <string name="email_error">Valid E-mail address required</string>
+    <string name="pass_error">Password must be longer than 6 charactrers</string>
+    <string name="oldUser_error">E-mail address already exists</string>
+    
+</resources>
