@@ -25,6 +25,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +36,8 @@ import android.widget.TextView;
 public class registerActivity extends Activity {
 	
 	private EditText firstName,lastName,emailId,password;
+	private static final int size = 4;
+	private boolean formValidationbits[];
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
 	private static boolean isValidEmail(String emailId){
@@ -74,10 +78,163 @@ public class registerActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.register);
+	    formValidationbits = new boolean[size];
 	    final Context cont = this;
-	    Button registerButton = (Button) findViewById(R.id.registerButton);
-	    registerButton.setOnClickListener(new View.OnClickListener() {
+	    final Button registerButton = (Button) findViewById(R.id.registerButton);
+	    registerButton.setEnabled(false);
+	    firstName = (EditText)findViewById(R.id.register_fname);
+    	lastName = (EditText)findViewById(R.id.register_lname);
+    	emailId = (EditText)findViewById(R.id.register_emailId);
+    	password = (EditText)findViewById(R.id.register_password);
+    	firstName.addTextChangedListener(new TextWatcher() {
+			boolean isFirstKey;
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				if(s.length()==0){
+					firstName.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.formvalidationerror, 0);
+					formValidationbits[0] = false;
+					if(registerButton.isEnabled()){
+						registerButton.setEnabled(false);
+					}
+				}
+				else if(isFirstKey){
+					firstName.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.formvalidationok, 0);
+					formValidationbits[0] = true;
+					if(!registerButton.isEnabled()&&formValidationbits[0]&&formValidationbits[1]&&formValidationbits[2]&&formValidationbits[3]){
+						registerButton.setEnabled(true);
+					}
+				}
+			}
 			
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				if(s.length()==0){
+					isFirstKey = true;
+				}
+				else if(isFirstKey){
+					isFirstKey = false;
+				}
+					
+			}
+			
+			public void afterTextChanged(Editable s) {
+				
+			}
+		});
+    	
+    	lastName.addTextChangedListener(new TextWatcher() {
+    		boolean isFirstKey;
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				if(s.length()==0){
+					lastName.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.formvalidationerror, 0);
+					formValidationbits[1] = false;
+					if(registerButton.isEnabled()){
+						registerButton.setEnabled(false);
+					}
+				}
+				else if(isFirstKey){
+					lastName.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.formvalidationok, 0);
+					formValidationbits[1] = true;
+					if(!registerButton.isEnabled()&&formValidationbits[0]&&formValidationbits[1]&&formValidationbits[2]&&formValidationbits[3]){
+						registerButton.setEnabled(true);
+					}
+				}
+				
+			}
+			
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				if(s.length()==0){
+					isFirstKey = true;
+				}
+				else if(isFirstKey){
+					isFirstKey = false;
+				}
+				
+			}
+			
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+    	
+    	emailId.addTextChangedListener(new TextWatcher() {
+    		boolean emailValid = false;
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				if(isValidEmail(s.toString())){
+					if(!emailValid){
+						emailId.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.formvalidationok, 0);
+						emailValid = true;
+						formValidationbits[2] = emailValid;
+						if(!registerButton.isEnabled()&&formValidationbits[0]&&formValidationbits[1]&&formValidationbits[2]&&formValidationbits[3]){
+							registerButton.setEnabled(true);
+						}
+					}
+				}
+				else{
+					if(emailValid){
+						emailId.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.formvalidationerror, 0);
+						emailValid = false;
+						formValidationbits[2] = emailValid;
+						if(registerButton.isEnabled()){
+							registerButton.setEnabled(false);
+						}
+					}
+				}
+			}
+			
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				
+				
+			}
+			
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	    
+    	password.addTextChangedListener(new TextWatcher() {
+			boolean passValid = false;
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				if(s.length()>=6){
+					if(!passValid){
+						password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.formvalidationok, 0);
+						passValid = true;
+						formValidationbits[3] = passValid;
+						if(!registerButton.isEnabled()&&formValidationbits[0]&&formValidationbits[1]&&formValidationbits[2]&&formValidationbits[3]){
+							registerButton.setEnabled(true);
+						}
+					}
+				}
+				else{
+					if(passValid){
+						password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.formvalidationerror, 0);
+						passValid = false;
+						formValidationbits[3] = passValid;
+						if(registerButton.isEnabled()){
+							registerButton.setEnabled(false);
+						}
+					}
+				}
+			}
+			
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	    registerButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				/*ProgressDialog dialog = ProgressDialog.show(cont, "", 
                         "Loading. Please wait...", true);*/
@@ -88,25 +245,23 @@ public class registerActivity extends Activity {
 			    TextView registerMessage = (TextView) findViewById(R.id.registerMessage);
 
 			    try {
-			        // Add your data
-			    	firstName = (EditText)findViewById(R.id.register_fname);
-			    	lastName = (EditText)findViewById(R.id.register_lname);
-			    	emailId = (EditText)findViewById(R.id.register_emailId);
-			    	password = (EditText)findViewById(R.id.register_password);
+			        // Add data
+			    	
 			    	Log.d("Firstname", firstName.getText().toString());
 			    	Log.d("Lastname",lastName.getText().toString());
 			    	Log.d("Email",emailId.getText().toString());
 			    	Log.d("Password",password.getText().toString());
 			    	
 			    	String fnameValue, lnameValue, emailValue, passValue; 
-			    	boolean isFormValid = true;
+			    	//boolean isFormValid = true;
 			    	fnameValue = firstName.getText().toString().trim();
 			    	lnameValue = lastName.getText().toString().trim();
 			    	emailValue = emailId.getText().toString().trim();
 			    	passValue = password.getText().toString().trim();
 			    	
 			    	
-			    	if(fnameValue.length()==0){
+			    	/*if(fnameValue.length()==0){
+			    		firstName.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.formvalidationerror, 0);
 			    		registerMessage.setText(R.string.fname_error);
 			    		isFormValid = false;
 			    	}
@@ -118,7 +273,7 @@ public class registerActivity extends Activity {
 			    		registerMessage.setText(R.string.email_error);
 			    		isFormValid = false;
 			    	}
-			    	else if(passValue.length()==0){
+			    	else if(passValue.length()<6){
 			    		registerMessage.setText(R.string.pass_error);
 			    		isFormValid = false;
 			    	}
@@ -127,16 +282,16 @@ public class registerActivity extends Activity {
 			    		registerMessage.setVisibility(TextView.VISIBLE);
 			    		return;
 			    	}
-			    	
+			    	*/
 			        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
-			        nameValuePairs.add(new BasicNameValuePair("FirstName", firstName.getText().toString()));
-			        nameValuePairs.add(new BasicNameValuePair("LastName", lastName.getText().toString()));
-			        nameValuePairs.add(new BasicNameValuePair("EmailAddress", emailId.getText().toString()));
-			        nameValuePairs.add(new BasicNameValuePair("Password", password.getText().toString()));
+			        nameValuePairs.add(new BasicNameValuePair("FirstName", fnameValue));
+			        nameValuePairs.add(new BasicNameValuePair("LastName", lnameValue));
+			        nameValuePairs.add(new BasicNameValuePair("EmailAddress", emailValue));
+			        nameValuePairs.add(new BasicNameValuePair("Password", passValue));
 			        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 			        
-			        // Execute HTTP Post Request
+			        // Execute HTTP Post Requests
 			        HttpResponse response = httpclient.execute(httppost);
 			        HttpEntity entity = response.getEntity();
 			        InputStream instream = entity.getContent();
@@ -144,26 +299,36 @@ public class registerActivity extends Activity {
 			        
 			        JSONObject json=new JSONObject(result);
 			        Log.d("JSon obj", json.toString());
-			        int isnewRegister = json.getInt("RegistrationStatus");
-			        if(isnewRegister==0){
-			        	System.out.println("NEw Registration");
-			        	startActivity(new Intent(cont,homeActivity.class));
+			        boolean isValidationError = json.getBoolean("HasValidationErrors");
+			        if(!isValidationError){
+			        	int isnewRegister = json.getInt("RegistrationStatus");
+				        if(isnewRegister==0){
+				        	System.out.println("NEw Registration");
+				        	startActivity(new Intent(cont,homeActivity.class));
+				        }
+				        else if(isnewRegister == 1){
+				        	System.out.println(R.string.oldUser_error);
+				        	registerMessage.setText(R.string.oldUser_error);
+				        	registerMessage.setVisibility(TextView.VISIBLE);
+				        }
 			        }
-			        else if(isnewRegister == 1){
-			        	System.out.println(R.string.oldUser_error);
-			        	registerMessage.setText(R.string.oldUser_error);
+			        else{
+			        	registerMessage.setText("Validation Error");
 			        	registerMessage.setVisibility(TextView.VISIBLE);
 			        }
+			        
 			        
 			        instream.close();
 			        //dialog.dismiss();
 			        
 			    } catch (ClientProtocolException e) {
-			        // TODO Auto-generated catch block
+			        Log.e("ClientProtocolException", e.getMessage());
+			        e.printStackTrace();
 			    } catch (IOException e) {
-			        // TODO Auto-generated catch block
+			    	Log.e("IOException", e.getMessage());
+			    	e.printStackTrace();
 			    } catch (JSONException e) {
-					// TODO Auto-generated catch block
+			    	Log.e("JSONException", e.getMessage());
 					e.printStackTrace();
 				}
 			}
