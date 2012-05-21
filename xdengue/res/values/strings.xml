@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World, XdengueActivity!</string>
     <string name="app_name">Xdengue</string>
+    <string name="login_error">Username/Password Incorrect!</string>
 
 </resources>
