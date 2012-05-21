@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class homeActivity extends Activity {
+public class homeActivity extends customLogoActivity {
 
 	/** Called when the activity is first created. */
 	@Override
@@ -18,6 +18,7 @@ public class homeActivity extends Activity {
 		final Context cont = this;
 		ImageButton aboutUsButton = (ImageButton) findViewById(R.id.aboutUsButton);
 		ImageButton preventionButton = (ImageButton) findViewById(R.id.preventionButton);
+		ImageButton myLocationButton = (ImageButton) findViewById(R.id.myLocationButton);
 		aboutUsButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				startActivity(new Intent(cont, aboutUsActivity.class));				
@@ -27,6 +28,12 @@ public class homeActivity extends Activity {
 		preventionButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				startActivity(new Intent(cont, preventionActivity.class));				
+			}
+		});
+		
+		myLocationButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(cont, myLocationActivity.class));				
 			}
 		});
 		
