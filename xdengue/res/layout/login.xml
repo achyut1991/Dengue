@@ -18,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter username"
-            android:inputType="textPersonName" >
+            android:drawableRight="@drawable/formvalidationerror"
+            android:inputType="textEmailAddress" >
 
             <requestFocus />
         </EditText>
@@ -28,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter password"
+            android:drawableRight="@drawable/formvalidationerror"
             android:inputType="textPassword" />
     </LinearLayout>
 
