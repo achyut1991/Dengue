@@ -1,12 +1,14 @@
 package com.smartcommunities.xdengue;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.smartcommunities.xdengue.dataModel.CustomerData;
 
 public class homeActivity extends customLogoActivity {
 
@@ -15,10 +17,16 @@ public class homeActivity extends customLogoActivity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
-		
-		XdengueGlobalState globalState = (XdengueGlobalState)getApplication();
-		if(globalState!=null){
-			((TextView)findViewById(R.id.didyouknow)).setText(globalState.getCustomerData().getDidYouKnow());
+		CustomerData cd = null;
+		try{
+		cd = ((XdengueGlobalState)getApplication()).getCustomerData();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			Log.v("cutomer data: ", e.getMessage());
+		}
+		if(cd!=null){
+			((TextView)findViewById(R.id.didyouknow)).setText(cd.getDidYouKnow());
 		}
 		final Context cont = this;
 		ImageButton aboutUsButton = (ImageButton) findViewById(R.id.aboutUsButton);

@@ -259,30 +259,6 @@ public class registerActivity extends Activity {
 			    	emailValue = emailId.getText().toString().trim();
 			    	passValue = password.getText().toString().trim();
 			    	
-			    	
-			    	/*if(fnameValue.length()==0){
-			    		firstName.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.formvalidationerror, 0);
-			    		registerMessage.setText(R.string.fname_error);
-			    		isFormValid = false;
-			    	}
-			    	else if(lnameValue.length()==0){
-			    		registerMessage.setText(R.string.lname_error);
-			    		isFormValid = false;
-			    	}
-			    	else if(!isValidEmail(emailValue)){
-			    		registerMessage.setText(R.string.email_error);
-			    		isFormValid = false;
-			    	}
-			    	else if(passValue.length()<6){
-			    		registerMessage.setText(R.string.pass_error);
-			    		isFormValid = false;
-			    	}
-			    	
-			    	if(!isFormValid){
-			    		registerMessage.setVisibility(TextView.VISIBLE);
-			    		return;
-			    	}
-			    	*/
 			        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
 			        nameValuePairs.add(new BasicNameValuePair("FirstName", fnameValue));
 			        nameValuePairs.add(new BasicNameValuePair("LastName", lnameValue));
