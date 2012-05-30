@@ -1,9 +1,8 @@
 package com.smartcommunities.xdengue;
 
-import com.smartcommunities.xdengue.dataModel.CustomerData;
-
 import android.app.Application;
-import android.content.Intent;
+
+import com.smartcommunities.xdengue.dataModel.CustomerData;
 
 public class XdengueGlobalState extends Application {
 	private CustomerData customerData;
