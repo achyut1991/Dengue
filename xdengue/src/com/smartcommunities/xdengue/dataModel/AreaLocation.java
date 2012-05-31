@@ -3,7 +3,7 @@ package com.smartcommunities.xdengue.dataModel;
 import java.util.List;
 
 
-public class AreaLocation {
+public class AreaLocation extends Location {
 	private List<Point> Points;
 	private Point AreaCenter;
 	public List<Point> getPoints() {

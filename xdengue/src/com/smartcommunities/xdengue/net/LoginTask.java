@@ -84,6 +84,7 @@ public class LoginTask extends AsyncTask<String, Void, String>{
 
 				System.out.println(cd.getCustomer().getFirstName());
 				context.startActivity(new Intent(context, homeActivity.class));
+				callingActivity.finish();
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

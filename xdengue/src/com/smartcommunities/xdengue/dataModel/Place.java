@@ -9,6 +9,7 @@ public class Place {
 	private int AlertRadius;
 	private int PlaceType;
 	private PointLocation Location;
+	private String IconName;
 	private List<MobileNumber> MobileNumbers;
 	private List<PlaceReport> PlaceReports;
 	public int getPlaceId() {
@@ -52,5 +53,11 @@ public class Place {
 	}
 	public void setPlaceReports(List<PlaceReport> placeReports) {
 		PlaceReports = placeReports;
+	}
+	public String getIconName() {
+		return IconName;
+	}
+	public void setIconName(String iconName) {
+		IconName = iconName;
 	}
 }

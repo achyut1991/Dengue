@@ -1,13 +1,12 @@
 package com.smartcommunities.xdengue.dataModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class CustomerData {
 	private boolean HasErrorLogin;
 	private Customer Customer;
-	private List<Report> OpenReports = new ArrayList<Report>();
+	private List<Report> OpenReports;
 	private String DidYouKnow;
 	private News News;
 	private Manifest Manifest;
