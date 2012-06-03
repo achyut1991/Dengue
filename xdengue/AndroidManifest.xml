@@ -29,7 +29,7 @@
         <activity android:label="Personal Protection" android:name="personalProtectionActivity" android:launchMode="standard"></activity>
         <activity android:launchMode="standard" android:label="Breeding Sites" android:name="breedingSitesActivity"></activity>
         <activity android:launchMode="standard" android:label="Mozzie Wipe-out" android:name="mozzieWipeoutActivity"></activity>
-        <activity android:name="loginActivity" android:launchMode="standard" android:label="login"></activity>
+        <activity android:name="loginActivity" android:windowSoftInputMode="adjustPan" android:launchMode="standard" android:label="login"></activity>
         <activity android:name="registerActivity" android:launchMode="standard" android:label="register"></activity>
         <activity android:name="myLocationActivity" android:launchMode="standard"></activity>
         <uses-library android:name="com.google.android.maps" />

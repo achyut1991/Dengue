@@ -1,26 +1,38 @@
 package com.smartcommunities.xdengue;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.graphics.Canvas;
+import android.graphics.Canvas.VertexMode;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
-import com.google.android.maps.MyLocationOverlay;
-
-import android.app.Activity;
-import android.content.Context;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
+import com.google.android.maps.OverlayItem;
 import com.google.android.maps.MapView.LayoutParams;
-import android.view.View;
-import android.widget.LinearLayout;
+import com.google.android.maps.MyLocationOverlay;
+import com.google.android.maps.Overlay;
+import com.google.android.maps.Projection;
+import com.smartcommunities.xdengue.dataModel.CustomerData;
 
 public class myLocationActivity extends MapActivity {
 
 	private MapView mapView;
 	private MapController mapController;
 	private MyLocationOverlay myLocOverlay;
+	private List<Overlay> mapOverlays;
 
 	/** Called when the activity is first created. */
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,9 +50,10 @@ public class myLocationActivity extends MapActivity {
 
 		mapController = mapView.getController();
 
+		mapOverlays = mapView.getOverlays();
 		myLocOverlay = new MyLocationOverlay(this, mapView);
 		myLocOverlay.enableMyLocation();
-		mapView.getOverlays().add(myLocOverlay);
+		mapOverlays.add(myLocOverlay);
 
 		myLocOverlay.runOnFirstFix(new Runnable() {
 			public void run() {
@@ -49,6 +62,21 @@ public class myLocationActivity extends MapActivity {
 			}
 		});
 
+		CustomerData cd = null;
+		try {
+			cd = ((XdengueGlobalState) getApplication()).getCustomerData();
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.v("cutomer data: ", e.getMessage());
+		}
+
+		for (int i = 0; i < cd.getOpenReports().size(); i++) {
+			ArrayList<GeoPoint> affected = new ArrayList<GeoPoint>();
+			for (int j = 0; j < cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getPoints().size(); j++) {
+				affected.add(new GeoPoint((int) (cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getPoints().get(j).getLatitude() * 1E6),(int) (cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getPoints().get(j).getLongitude() * 1E6)));
+			}			
+			mapOverlays.add(new MyOverlay(affected));
+		}
 	}
 
 	protected boolean isRouteDisplayed() {
