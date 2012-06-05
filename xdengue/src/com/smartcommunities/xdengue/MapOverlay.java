@@ -2,6 +2,8 @@ package com.smartcommunities.xdengue;
 
 import java.util.ArrayList;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,11 +15,17 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.Projection;
 
-public class MyOverlay extends Overlay {
+public class MapOverlay extends Overlay {
 	private ArrayList<GeoPoint> affectedArea = new ArrayList<GeoPoint>();
+	private GeoPoint centerPoint;
+	private int severity;
+	private Bitmap severityIcon;
 
-	public MyOverlay(ArrayList<GeoPoint> affectedArea) {
+	public MapOverlay(ArrayList<GeoPoint> affectedArea,int severity, Bitmap severityIcon,GeoPoint centerPoint) {
 		this.affectedArea = affectedArea;
+		this.severity = severity;
+		this.severityIcon = severityIcon;
+		this.centerPoint = centerPoint;
 	}
 
 	@Override
@@ -48,6 +56,9 @@ public class MyOverlay extends Overlay {
 			mPaint.setStrokeWidth(2);
 
 			canvas.drawPath(path, mPaint);
+			Point screenPts = new Point();
+			mapView.getProjection().toPixels(centerPoint, screenPts);
+			canvas.drawBitmap(severityIcon, screenPts.x-16, screenPts.y-55, null);
 		}
 		return super.draw(canvas, mapView, shadow, when);
 	}
@@ -65,5 +76,21 @@ public class MyOverlay extends Overlay {
 
 	public void setAffectedArea(ArrayList<GeoPoint> affectedArea) {
 		this.affectedArea = affectedArea;
+	}
+
+	public int getSeverity() {
+		return severity;
+	}
+
+	public void setSeverity(int severity) {
+		this.severity = severity;
+	}
+
+	public GeoPoint getCenterPoint() {
+		return centerPoint;
+	}
+
+	public void setCenterPoint(GeoPoint centerPoint) {
+		this.centerPoint = centerPoint;
 	}
 }

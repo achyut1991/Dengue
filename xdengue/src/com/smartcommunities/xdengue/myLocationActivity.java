@@ -5,6 +5,8 @@ import java.util.List;
 
 import android.graphics.Canvas;
 import android.graphics.Canvas.VertexMode;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -71,11 +73,19 @@ public class myLocationActivity extends MapActivity {
 		}
 
 		for (int i = 0; i < cd.getOpenReports().size(); i++) {
+			int severity = cd.getOpenReports().get(i).getSeverity();
 			ArrayList<GeoPoint> affected = new ArrayList<GeoPoint>();
 			for (int j = 0; j < cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getPoints().size(); j++) {
 				affected.add(new GeoPoint((int) (cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getPoints().get(j).getLatitude() * 1E6),(int) (cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getPoints().get(j).getLongitude() * 1E6)));
-			}			
-			mapOverlays.add(new MyOverlay(affected));
+			}
+			GeoPoint centerPoint = new GeoPoint((int)(cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getAreaCenter().getLatitude() * 1E6),(int)(cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getAreaCenter().getLongitude() * 1E6));
+			Bitmap bmp = null;
+			if(severity==0){
+				bmp = BitmapFactory.decodeResource(getResources(), R.drawable.mosquitoyellow);
+			}
+			else if(severity==2)
+				bmp = BitmapFactory.decodeResource(getResources(), R.drawable.mosquitored);
+			mapOverlays.add(new MapOverlay(affected,severity,bmp,centerPoint));
 		}
 	}
 
