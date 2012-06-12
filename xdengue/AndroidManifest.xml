@@ -23,14 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		<activity android:name="homeActivity" android:label="X-Dengue" android:launchMode="standard" android:noHistory="true"></activity>
+		<activity android:name="homeActivity" android:label="X-Dengue" android:launchMode="standard"></activity>
         <activity android:name="aboutUsActivity" android:label="About X-Dengue" android:launchMode="standard"></activity>
         <activity android:name="preventionActivity" android:label="Dengue Prevention" android:launchMode="standard"></activity>
         <activity android:label="Personal Protection" android:name="personalProtectionActivity" android:launchMode="standard"></activity>
         <activity android:launchMode="standard" android:label="Breeding Sites" android:name="breedingSitesActivity"></activity>
         <activity android:launchMode="standard" android:label="Mozzie Wipe-out" android:name="mozzieWipeoutActivity"></activity>
         <activity android:name="loginActivity" android:windowSoftInputMode="adjustPan" android:launchMode="standard" android:label="login"></activity>
-        <activity android:name="registerActivity" android:launchMode="standard" android:label="register" android:noHistory="true"></activity>
+        <activity android:name="registerActivity" android:launchMode="standard" android:label="register"></activity>
         <activity android:name="myLocationActivity" android:launchMode="standard"></activity>
         <uses-library android:name="com.google.android.maps" />
         <activity android:name="customLogoActivity"></activity>
