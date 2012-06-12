@@ -78,7 +78,7 @@ public class RegisterTask extends AsyncTask<String, Void, String> {
 		try {
 			JSONObject json = new JSONObject(result);
 			if (json.getBoolean("HasValidationErrors")) {
-				XdenguePreferences.getEditor(context).clear();
+				XdenguePreferences.getEditor(context).clear().commit();
 				Toast.makeText(context, R.string.validation_error,
 						Toast.LENGTH_LONG).show();
 			} else {
@@ -101,14 +101,14 @@ public class RegisterTask extends AsyncTask<String, Void, String> {
 		    		}
 		        }
 		        else if(isnewRegister == 1){
-		        	XdenguePreferences.getEditor(context).clear();
+		        	XdenguePreferences.getEditor(context).clear().commit();
 		        	System.out.println(R.string.oldUser_error);
 		        	Toast.makeText(context, R.string.oldUser_error,
 							Toast.LENGTH_LONG).show();
 		        }
 			}
 		} catch (JSONException e) {
-			XdenguePreferences.getEditor(context).clear();
+			XdenguePreferences.getEditor(context).clear().commit();
 			e.printStackTrace();
 		}
 	}

@@ -77,7 +77,7 @@ public class LoginTask extends AsyncTask<String, Void, String>{
 			if (json.getBoolean("HasErrorLogin")) {
 				Toast.makeText(context, R.string.login_error,
 						Toast.LENGTH_LONG).show();
-				XdenguePreferences.getEditor(context).clear();
+				XdenguePreferences.getEditor(context).clear().commit();
 			} else {
 				Log.d("Email from prefs", XdenguePreferences.readString(context, XdenguePreferences.EMAIL, ""));
 				Log.d("Pass from prefs", XdenguePreferences.readString(context, XdenguePreferences.PASS, ""));
@@ -92,7 +92,7 @@ public class LoginTask extends AsyncTask<String, Void, String>{
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
-			XdenguePreferences.getEditor(context).clear();
+			XdenguePreferences.getEditor(context).clear().commit();
 			e.printStackTrace();
 		}
 	}
