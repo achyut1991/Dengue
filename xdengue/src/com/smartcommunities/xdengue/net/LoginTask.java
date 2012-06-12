@@ -15,11 +15,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.smartcommunities.xdengue.R;
 import com.smartcommunities.xdengue.XdengueGlobalState;
+import com.smartcommunities.xdengue.XdenguePreferences;
 import com.smartcommunities.xdengue.homeActivity;
 import com.smartcommunities.xdengue.dataModel.CustomerData;
 
@@ -75,7 +77,10 @@ public class LoginTask extends AsyncTask<String, Void, String>{
 			if (json.getBoolean("HasErrorLogin")) {
 				Toast.makeText(context, R.string.login_error,
 						Toast.LENGTH_LONG).show();
+				XdenguePreferences.getEditor(context).clear();
 			} else {
+				Log.d("Email from prefs", XdenguePreferences.readString(context, XdenguePreferences.EMAIL, ""));
+				Log.d("Pass from prefs", XdenguePreferences.readString(context, XdenguePreferences.PASS, ""));
 				Gson gson = new Gson();
 				CustomerData cd = gson.fromJson(result, CustomerData.class);
 
@@ -84,10 +89,10 @@ public class LoginTask extends AsyncTask<String, Void, String>{
 
 				System.out.println(cd.getCustomer().getFirstName());
 				context.startActivity(new Intent(context, homeActivity.class));
-				callingActivity.finish();
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
+			XdenguePreferences.getEditor(context).clear();
 			e.printStackTrace();
 		}
 	}

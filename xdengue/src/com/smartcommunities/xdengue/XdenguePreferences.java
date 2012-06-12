@@ -8,8 +8,8 @@ public class XdenguePreferences {
 	public static final String PREF_NAME = "XDengue_PREFERENCES";
 	public static final int MODE = Context.MODE_PRIVATE;
 	
-	public static final String UNAME = "username";
-	public static final String EMAIL = "email";
+	public static final String EMAIL = "emailId";
+	public static final String PASS = "password";
 
 	public static void writeBoolean(Context context, String key, boolean value) {
 		getEditor(context).putBoolean(key, value).commit();

@@ -136,13 +136,14 @@ public class loginActivity extends Activity {
 		loginButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
-
+				String emailAddress = emailId.getText().toString().trim();
+				String passwordString = password.getText().toString().trim();
 				List<NameValuePair> params = new LinkedList<NameValuePair>();
 				String url = "http://www.x-dengue.com/mobilev1/FullCustomerData";
-				params.add(new BasicNameValuePair("emailAddress", emailId
-						.getText().toString().trim()));
-				params.add(new BasicNameValuePair("password", password
-						.getText().toString().trim()));
+				params.add(new BasicNameValuePair("emailAddress", emailAddress));
+				params.add(new BasicNameValuePair("password", passwordString));
+				XdenguePreferences.writeString(cont, XdenguePreferences.EMAIL, emailAddress);
+				XdenguePreferences.writeString(cont, XdenguePreferences.PASS, passwordString);
 				String paramString = URLEncodedUtils.format(params, "utf-8");
 				url += "?" + paramString;
 				LoginTask loginTask = new LoginTask(cont,currentActivity);
