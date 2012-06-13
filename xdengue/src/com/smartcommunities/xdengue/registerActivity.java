@@ -4,12 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -227,17 +229,26 @@ public class registerActivity extends Activity {
 			}
 		});
 	    registerButton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {		
+			public void onClick(View v) {
+				String emailAddress = emailId.getText().toString().trim();
+				String passwordString = password.getText().toString().trim();
 				List<NameValuePair> params = new LinkedList<NameValuePair>();
 				params.add(new BasicNameValuePair("FirstName", firstName.getText().toString().trim()));
 		        params.add(new BasicNameValuePair("LastName", lastName.getText().toString().trim()));
-		        params.add(new BasicNameValuePair("EmailAddress", emailId.getText().toString().trim()));
-		        params.add(new BasicNameValuePair("Password", password.getText().toString().trim()));
-				String url = "http://www.x-dengue.com/mobilev1/FullCustomerData";
-				String paramString = URLEncodedUtils.format(params, "utf-8");
-				url += "?" + paramString;
-				RegisterTask registerTask = new RegisterTask(cont,currentActivity);
-				registerTask.execute(url);	    
+		        params.add(new BasicNameValuePair("EmailAddress", emailAddress));
+		        params.add(new BasicNameValuePair("Password", passwordString));
+		        XdenguePreferences.writeString(cont, XdenguePreferences.EMAIL, emailAddress);
+				XdenguePreferences.writeString(cont, XdenguePreferences.PASS, passwordString);
+				String url = "http://www.x-dengue.com/mobilev1/Register";
+				try {
+					UrlEncodedFormEntity registerData = new UrlEncodedFormEntity(params);
+					RegisterTask registerTask = new RegisterTask(cont,currentActivity,registerData);
+					registerTask.execute(url);	 
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				   
 			}
 		});
 	}

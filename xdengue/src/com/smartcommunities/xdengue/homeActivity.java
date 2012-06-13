@@ -26,7 +26,6 @@ public class homeActivity extends customLogoActivity {
 			Log.v("cutomer data: ", e.getMessage());
 		}
 		if(cd!=null){
-			System.out.println("########$$$$$$$$##### "  + cd.getCustomer().getPlaces().get(0).getIconName());
 			((TextView)findViewById(R.id.didyouknow)).setText(cd.getDidYouKnow());
 		}
 		final Context cont = this;
