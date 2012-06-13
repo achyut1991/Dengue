@@ -31,7 +31,6 @@ public class MapOverlay extends Overlay {
 	@Override
 	public boolean draw(Canvas canvas, MapView mapView, boolean shadow,
 			long when) {
-		// TODO Auto-generated method stub
 		Projection projection = mapView.getProjection();
 		if (shadow == false) {
 
@@ -58,15 +57,13 @@ public class MapOverlay extends Overlay {
 			canvas.drawPath(path, mPaint);
 			Point screenPts = new Point();
 			mapView.getProjection().toPixels(centerPoint, screenPts);
-			canvas.drawBitmap(severityIcon, screenPts.x-16, screenPts.y-55, null);
+			canvas.drawBitmap(severityIcon, screenPts.x-severityIcon.getWidth()/2, screenPts.y-severityIcon.getHeight(), null);
 		}
 		return super.draw(canvas, mapView, shadow, when);
 	}
 
 	@Override
 	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
-		// TODO Auto-generated method stub
-
 		super.draw(canvas, mapView, shadow);
 	}
 

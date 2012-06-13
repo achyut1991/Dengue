@@ -3,35 +3,30 @@ package com.smartcommunities.xdengue;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.graphics.Canvas;
-import android.graphics.Canvas.VertexMode;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
-import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
-import com.google.android.maps.OverlayItem;
 import com.google.android.maps.MapView.LayoutParams;
 import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
-import com.google.android.maps.Projection;
 import com.smartcommunities.xdengue.dataModel.CustomerData;
 
 public class myLocationActivity extends MapActivity {
 
 	private MapView mapView;
+	private EditText searchBox1;
 	private MapController mapController;
 	private MyLocationOverlay myLocOverlay;
 	private List<Overlay> mapOverlays;
@@ -40,6 +35,19 @@ public class myLocationActivity extends MapActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mylocation);
+		
+		searchBox1 = (EditText) findViewById(R.id.searchText1);
+		
+		searchBox1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			
+		    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+		        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+					performSearch();
+		            return true;
+		        }
+		        return false;
+		    }			
+		});
 
 		mapView = (MapView) findViewById(R.id.mapview1);
 		mapView.setBuiltInZoomControls(true);
@@ -92,6 +100,10 @@ public class myLocationActivity extends MapActivity {
 	protected boolean isRouteDisplayed() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	private void performSearch() {
+		// TODO Auto-generated method stu
 	}
 
 }
