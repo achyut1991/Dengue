@@ -11,14 +11,15 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@android:drawable/ic_menu_search"
         android:hint="Search address for dengue nearby"
-        android:imeOptions="actionSearch">
+        android:textSize="15sp"
+        android:imeOptions="actionSearch" >
 
         <requestFocus />
     </EditText>
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="381dp" >
 
         <com.google.android.maps.MapView
             android:id="@+id/mapview1"
@@ -34,7 +35,26 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
-        
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/centerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="center" />
+
+        <Button
+            android:id="@+id/newPlaceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="New Place here" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -35,6 +35,7 @@
         <uses-library android:name="com.google.android.maps" />
         <activity android:name="customLogoActivity"></activity>
         <activity android:launchMode="standard" android:name="hotSpotsActivity" android:label="Hot Spots"></activity>
+        <activity android:name="newPlaceActivity" android:launchMode="standard"></activity>
     </application>
 
 </manifest>
