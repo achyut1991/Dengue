@@ -49,7 +49,6 @@ public class homeActivity extends customLogoActivity {
 				startActivity(new Intent(cont, myLocationActivity.class));
 			}
 		});
-		
 	}
 
 }

@@ -142,7 +142,7 @@ public class myLocationActivity extends MapActivity {
 			Log.v("cutomer data: ", e.getMessage());
 		}
 		String emailAddress = cd.getCustomer().getEmailAddress();
-		String passwordString = "123456";
+		String passwordString = XdenguePreferences.readString(cont, XdenguePreferences.PASS, "");
 		String address = searchBox1.getText().toString();
 		String maxRadius = "10";
 		List<NameValuePair> params = new LinkedList<NameValuePair>();

@@ -24,6 +24,7 @@ import com.smartcommunities.xdengue.XdengueGlobalState;
 import com.smartcommunities.xdengue.XdenguePreferences;
 import com.smartcommunities.xdengue.homeActivity;
 import com.smartcommunities.xdengue.dataModel.CustomerData;
+import com.smartcommunities.xdengue.dataModel.SearchAddressResult;
 
 public class SearchAddressTask extends AsyncTask<String, Void, String>{
 	private Context context;
@@ -77,23 +78,13 @@ public class SearchAddressTask extends AsyncTask<String, Void, String>{
 			if (json.getBoolean("HasError")) {
 				Toast.makeText(context, R.string.login_error,
 						Toast.LENGTH_LONG).show();
-				/*XdenguePreferences.getEditor(context).clear().commit();*/
 			} else {
-				/*Log.d("Email from prefs", XdenguePreferences.readString(context, XdenguePreferences.EMAIL, ""));
-				Log.d("Pass from prefs", XdenguePreferences.readString(context, XdenguePreferences.PASS, ""));*/
 				Gson gson = new Gson();
-				CustomerData cd = gson.fromJson(result, CustomerData.class);
+				SearchAddressResult sar = gson.fromJson(result, SearchAddressResult.class);
 
-				// Set the CustomerData
-				((XdengueGlobalState) callingActivity.getApplication()).setCustomerData(cd);
-
-				System.out.println(cd.getCustomer().getFirstName());
-				context.startActivity(new Intent(context, homeActivity.class));
-				callingActivity.finish();
+				System.out.println(sar.getStatus());
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			//XdenguePreferences.getEditor(context).clear().commit();
 			e.printStackTrace();
 		}
 	}
