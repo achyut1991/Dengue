@@ -26,7 +26,7 @@ import com.smartcommunities.xdengue.homeActivity;
 import com.smartcommunities.xdengue.dataModel.CustomerData;
 import com.smartcommunities.xdengue.dataModel.SearchAddressResult;
 
-public class SearchAddressTask extends AsyncTask<String, Void, String>{
+public class SearchAddressTask extends AsyncTask<String, Void, String> {
 	private Context context;
 	private Activity callingActivity;
 	private ProgressDialog dialog;
@@ -75,15 +75,18 @@ public class SearchAddressTask extends AsyncTask<String, Void, String>{
 		System.out.println(result);
 		try {
 			JSONObject json = new JSONObject(result);
-			if (json.getBoolean("HasError")) {
-				Toast.makeText(context, R.string.login_error,
-						Toast.LENGTH_LONG).show();
-			} else {
-				Gson gson = new Gson();
-				SearchAddressResult sar = gson.fromJson(result, SearchAddressResult.class);
+			Gson gson = new Gson();
+			SearchAddressResult sar = gson.fromJson(result,
+					SearchAddressResult.class);
 
-				System.out.println(sar.getStatus());
-			}
+			System.out.println(sar.getStatus());
+			System.out.println(sar.getGeocodingResult().getFormatted_address());
+			System.out.println(sar.getGeocodingResult().getGeometry()
+					.getLocation().getLat()
+					+ " "
+					+ sar.getGeocodingResult().getGeometry().getLocation()
+							.getLng());
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

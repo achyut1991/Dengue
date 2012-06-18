@@ -1,7 +1,10 @@
 package com.smartcommunities.xdengue.dataModel;
 
+import java.util.List;
+
 public class SearchAddressResult {
-	private GeocodingResult geocodingResult;
+	private List<ReportDistance> ReportsDistance;
+	private GeocodingResult GeocodingResult;
 	private String Status;
 	private Manifest Manifest;
 	public Manifest getManifest() {
@@ -17,9 +20,15 @@ public class SearchAddressResult {
 		Status = status;
 	}
 	public GeocodingResult getGeocodingResult() {
-		return geocodingResult;
+		return GeocodingResult;
 	}
 	public void setGeocodingResult(GeocodingResult geocodingResult) {
-		this.geocodingResult = geocodingResult;
+		this.GeocodingResult = geocodingResult;
+	}
+	public List<ReportDistance> getReportsDistance() {
+		return ReportsDistance;
+	}
+	public void setReportsDistance(List<ReportDistance> reportsDistance) {
+		ReportsDistance = reportsDistance;
 	}
 }

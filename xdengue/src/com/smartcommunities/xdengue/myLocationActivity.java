@@ -153,6 +153,7 @@ public class myLocationActivity extends MapActivity {
 		params.add(new BasicNameValuePair("maxRadius", maxRadius));
 		String paramString = URLEncodedUtils.format(params, "utf-8");
 		url += "?" + paramString;
+		System.out.println(url);
 		SearchAddressTask searchTask = new SearchAddressTask(cont, currentActivity);
 		searchTask.execute(url);
 	}
