@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp" >
+
+    <ImageView
+        android:id="@+id/myplaceitemicon"
+        android:layout_width="32dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/home" >
+    </ImageView>
+
+    <LinearLayout
+        android:id="@+id/myplacetextwrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/placename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@+id/label"
+            android:textColor="#000000"
+            android:textSize="20sp" >
+        </TextView>
+        <TextView
+            android:id="@+id/placeaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@+id/label"
+            android:textColor="#C0C0C0"
+            android:textSize="14sp" >
+        </TextView>
+    </LinearLayout>
+
+</LinearLayout>

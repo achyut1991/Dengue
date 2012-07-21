@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/navaigationbackground"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/placelistwrapper"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/myplaceslist"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:dividerHeight="1dp"
+            android:divider="#C0C0C0"
+            android:cacheColorHint="@android:color/transparent" />
+    </LinearLayout>
+
+</LinearLayout>
