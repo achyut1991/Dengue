@@ -6,6 +6,11 @@
  
     <style name="CustomTheme" parent="android:Theme">
         <item name="android:windowTitleSize">40dip</item>
-        <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
+        <item name="android:windowTitleBackgroundStyle">@android:color/transparent</item>
+        <item name="android:windowTitleStyle">@style/customTitleStyle</item>
+    </style>
+
+    <style name="customTitleStyle">
+        <item name="android:textColor">@android:color/transparent</item>
     </style>
 </resources>
