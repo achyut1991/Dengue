@@ -32,6 +32,7 @@ public class homeActivity extends customLogoActivity {
 		ImageButton aboutUsButton = (ImageButton) findViewById(R.id.aboutUsButton);
 		ImageButton preventionButton = (ImageButton) findViewById(R.id.preventionButton);
 		ImageButton myLocationButton = (ImageButton) findViewById(R.id.myLocationButton);
+		ImageButton myPlacesButton = (ImageButton) findViewById(R.id.myPlacesButton);
 		aboutUsButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				startActivity(new Intent(cont, aboutUsActivity.class));
@@ -47,6 +48,12 @@ public class homeActivity extends customLogoActivity {
 		myLocationButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				startActivity(new Intent(cont, myLocationActivity.class));
+			}
+		});
+		
+		myPlacesButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(cont, MyPlacesActivity.class));
 			}
 		});
 	}
