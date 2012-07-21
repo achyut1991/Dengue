@@ -3,8 +3,6 @@ package com.smartcommunities.xdengue;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class customLogoActivity extends Activity {
  

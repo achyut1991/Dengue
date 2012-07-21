@@ -13,23 +13,15 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.smartcommunities.xdengue.R;
-import com.smartcommunities.xdengue.XdengueGlobalState;
-import com.smartcommunities.xdengue.XdenguePreferences;
-import com.smartcommunities.xdengue.homeActivity;
-import com.smartcommunities.xdengue.dataModel.CustomerData;
 import com.smartcommunities.xdengue.dataModel.SearchAddressResult;
 
 public class SearchAddressTask extends AsyncTask<String, Void, String> {
-	private Context context;
-	private Activity callingActivity;
-	private ProgressDialog dialog;
+	private final Context context;
+	private final Activity callingActivity;
+	private final ProgressDialog dialog;
 
 	public SearchAddressTask(Context context, Activity callingActivity) {
 		this.context = context;
@@ -40,6 +32,8 @@ public class SearchAddressTask extends AsyncTask<String, Void, String> {
 	@Override
 	protected void onPreExecute() {
 		this.dialog.setMessage("Searching for address");
+		this.dialog.setCancelable(false);
+		this.dialog.setCanceledOnTouchOutside(false);
 		this.dialog.show();
 	}
 
@@ -53,8 +47,7 @@ public class SearchAddressTask extends AsyncTask<String, Void, String> {
 				HttpResponse execute = client.execute(httpGet);
 				InputStream content = execute.getEntity().getContent();
 
-				BufferedReader buffer = new BufferedReader(
-						new InputStreamReader(content));
+				BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
 				String s = "";
 				while ((s = buffer.readLine()) != null) {
 					response += s;
@@ -76,16 +69,11 @@ public class SearchAddressTask extends AsyncTask<String, Void, String> {
 		try {
 			JSONObject json = new JSONObject(result);
 			Gson gson = new Gson();
-			SearchAddressResult sar = gson.fromJson(result,
-					SearchAddressResult.class);
+			SearchAddressResult sar = gson.fromJson(result, SearchAddressResult.class);
 
 			System.out.println(sar.getStatus());
 			System.out.println(sar.getGeocodingResult().getFormatted_address());
-			System.out.println(sar.getGeocodingResult().getGeometry()
-					.getLocation().getLat()
-					+ " "
-					+ sar.getGeocodingResult().getGeometry().getLocation()
-							.getLng());
+			System.out.println(sar.getGeocodingResult().getGeometry().getLocation().getLat() + " " + sar.getGeocodingResult().getGeometry().getLocation().getLng());
 
 		} catch (JSONException e) {
 			e.printStackTrace();

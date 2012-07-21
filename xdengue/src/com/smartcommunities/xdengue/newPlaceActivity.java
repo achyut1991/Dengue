@@ -1,10 +1,9 @@
 package com.smartcommunities.xdengue;
 
-import com.google.android.maps.GeoPoint;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Toast;
+
+import com.google.android.maps.GeoPoint;
 
 public class newPlaceActivity extends Activity {
 	

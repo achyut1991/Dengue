@@ -31,6 +31,7 @@ import com.google.android.maps.MapView.LayoutParams;
 import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
 import com.smartcommunities.xdengue.dataModel.CustomerData;
+import com.smartcommunities.xdengue.dataModel.SearchAddressResult;
 import com.smartcommunities.xdengue.net.SearchAddressTask;
 
 public class myLocationActivity extends MapActivity {
@@ -43,23 +44,25 @@ public class myLocationActivity extends MapActivity {
 	final Context cont = this;
 	final Activity currentActivity = this;
 	private GeoPoint markerPosition;
+	private SearchAddressResult sar;
 
 	/** Called when the activity is first created. */
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mylocation);
-		
+
 		searchBox1 = (EditText) findViewById(R.id.searchText1);
-		
+
 		searchBox1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-			
-		    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-		        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 					performSearch();
-		            return true;
-		        }
-		        return false;
-		    }			
+					return true;
+				}
+				return false;
+			}
 		});
 
 		mapView = (MapView) findViewById(R.id.mapview1);
@@ -67,8 +70,7 @@ public class myLocationActivity extends MapActivity {
 		LinearLayout zoomLayout = (LinearLayout) findViewById(R.id.zoomOption);
 		View zoomView = mapView.getZoomControls();
 
-		zoomLayout.addView(zoomView, new LinearLayout.LayoutParams(
-				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		zoomLayout.addView(zoomView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		mapView.displayZoomControls(true);
 
 		mapController = mapView.getController();
@@ -84,7 +86,7 @@ public class myLocationActivity extends MapActivity {
 				mapController.animateTo(myLocOverlay.getMyLocation());
 			}
 		});
-		
+
 		Button centerButton = (Button) findViewById(R.id.centerButton);
 		centerButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -92,11 +94,11 @@ public class myLocationActivity extends MapActivity {
 				mapController.animateTo(myLocOverlay.getMyLocation());
 			}
 		});
-		
+
 		Button newPlaceButton = (Button) findViewById(R.id.newPlaceButton);
 		newPlaceButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Intent newPlaceIntent = new Intent(cont,	newPlaceActivity.class);
+				Intent newPlaceIntent = new Intent(cont, newPlaceActivity.class);
 				newPlaceIntent.putExtra("latitude", markerPosition.getLatitudeE6());
 				newPlaceIntent.putExtra("longitude", markerPosition.getLongitudeE6());
 				startActivity(newPlaceIntent);
@@ -115,24 +117,26 @@ public class myLocationActivity extends MapActivity {
 			int severity = cd.getOpenReports().get(i).getSeverity();
 			ArrayList<GeoPoint> affected = new ArrayList<GeoPoint>();
 			for (int j = 0; j < cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getPoints().size(); j++) {
-				affected.add(new GeoPoint((int) (cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getPoints().get(j).getLatitude() * 1E6),(int) (cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getPoints().get(j).getLongitude() * 1E6)));
+				affected.add(new GeoPoint((int) (cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getPoints().get(j).getLatitude() * 1E6), (int) (cd.getOpenReports().get(i)
+						.getLocationContainer().getAreaLocation().getPoints().get(j).getLongitude() * 1E6)));
 			}
-			GeoPoint centerPoint = new GeoPoint((int)(cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getAreaCenter().getLatitude() * 1E6),(int)(cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getAreaCenter().getLongitude() * 1E6));
+			GeoPoint centerPoint = new GeoPoint((int) (cd.getOpenReports().get(i).getLocationContainer().getAreaLocation().getAreaCenter().getLatitude() * 1E6), (int) (cd.getOpenReports().get(i)
+					.getLocationContainer().getAreaLocation().getAreaCenter().getLongitude() * 1E6));
 			Bitmap bmp = null;
-			if(severity==0){
+			if (severity == 0) {
 				bmp = BitmapFactory.decodeResource(getResources(), R.drawable.mosquitoyellow);
-			}
-			else if(severity==2)
+			} else if (severity == 2)
 				bmp = BitmapFactory.decodeResource(getResources(), R.drawable.mosquitored);
-			mapOverlays.add(new MapOverlay(affected,severity,bmp,centerPoint));
+			mapOverlays.add(new DrawPolygonOverlay(affected, severity, bmp, centerPoint));
 		}
 	}
 
+	@Override
 	protected boolean isRouteDisplayed() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	private void performSearch() {
 		CustomerData cd = null;
 		try {
@@ -156,6 +160,14 @@ public class myLocationActivity extends MapActivity {
 		System.out.println(url);
 		SearchAddressTask searchTask = new SearchAddressTask(cont, currentActivity);
 		searchTask.execute(url);
+	}
+
+	public void focusMapView(double latitude, double longitude) {
+		GeoPoint tempPoint = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
+		Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.didyouknow);
+		mapOverlays.add(new DrawPinOverlay(tempPoint, bmp));
+		mapController.setZoom(17);
+		mapController.animateTo(tempPoint);
 	}
 
 }

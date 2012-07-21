@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -39,6 +40,7 @@ public class loginActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login);
 
 		formValidationbits = new boolean[size];
@@ -51,23 +53,19 @@ public class loginActivity extends Activity {
 		emailId.addTextChangedListener(new TextWatcher() {
 			boolean emailValid = false;
 
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				if (isValidEmail(s.toString())) {
 					if (!emailValid) {
-						emailId.setCompoundDrawablesWithIntrinsicBounds(0, 0,
-								R.drawable.formvalidationok, 0);
+						emailId.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.formvalidationok, 0);
 						emailValid = true;
 						formValidationbits[0] = emailValid;
-						if (!loginButton.isEnabled() && formValidationbits[0]
-								&& formValidationbits[1]) {
+						if (!loginButton.isEnabled() && formValidationbits[0] && formValidationbits[1]) {
 							loginButton.setEnabled(true);
 						}
 					}
 				} else {
 					if (emailValid) {
-						emailId.setCompoundDrawablesWithIntrinsicBounds(0, 0,
-								R.drawable.formvalidationerror, 0);
+						emailId.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.formvalidationerror, 0);
 						emailValid = false;
 						formValidationbits[0] = emailValid;
 						if (loginButton.isEnabled()) {
@@ -77,8 +75,7 @@ public class loginActivity extends Activity {
 				}
 			}
 
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 				// TODO Auto-generated method stub
 
 			}
@@ -92,23 +89,19 @@ public class loginActivity extends Activity {
 		password.addTextChangedListener(new TextWatcher() {
 			boolean passValid = false;
 
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				if (s.length() >= 6) {
 					if (!passValid) {
-						password.setCompoundDrawablesWithIntrinsicBounds(0, 0,
-								R.drawable.formvalidationok, 0);
+						password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.formvalidationok, 0);
 						passValid = true;
 						formValidationbits[1] = passValid;
-						if (!loginButton.isEnabled() && formValidationbits[0]
-								&& formValidationbits[1]) {
+						if (!loginButton.isEnabled() && formValidationbits[0] && formValidationbits[1]) {
 							loginButton.setEnabled(true);
 						}
 					}
 				} else {
 					if (passValid) {
-						password.setCompoundDrawablesWithIntrinsicBounds(0, 0,
-								R.drawable.formvalidationerror, 0);
+						password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.formvalidationerror, 0);
 						passValid = false;
 						formValidationbits[1] = passValid;
 						if (loginButton.isEnabled()) {
@@ -118,8 +111,7 @@ public class loginActivity extends Activity {
 				}
 			}
 
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 				// TODO Auto-generated method stub
 
 			}
@@ -146,7 +138,7 @@ public class loginActivity extends Activity {
 				XdenguePreferences.writeString(cont, XdenguePreferences.PASS, passwordString);
 				String paramString = URLEncodedUtils.format(params, "utf-8");
 				url += "?" + paramString;
-				LoginTask loginTask = new LoginTask(cont,currentActivity);
+				LoginTask loginTask = new LoginTask(cont, currentActivity);
 				loginTask.execute(url);
 			}
 		});

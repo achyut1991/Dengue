@@ -3,7 +3,6 @@ package com.smartcommunities.xdengue;
 import java.util.ArrayList;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -15,13 +14,13 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.Projection;
 
-public class MapOverlay extends Overlay {
+public class DrawPolygonOverlay extends Overlay {
 	private ArrayList<GeoPoint> affectedArea = new ArrayList<GeoPoint>();
 	private GeoPoint centerPoint;
 	private int severity;
-	private Bitmap severityIcon;
+	private final Bitmap severityIcon;
 
-	public MapOverlay(ArrayList<GeoPoint> affectedArea,int severity, Bitmap severityIcon,GeoPoint centerPoint) {
+	public DrawPolygonOverlay(ArrayList<GeoPoint> affectedArea, int severity, Bitmap severityIcon, GeoPoint centerPoint) {
 		this.affectedArea = affectedArea;
 		this.severity = severity;
 		this.severityIcon = severityIcon;
@@ -29,8 +28,7 @@ public class MapOverlay extends Overlay {
 	}
 
 	@Override
-	public boolean draw(Canvas canvas, MapView mapView, boolean shadow,
-			long when) {
+	public boolean draw(Canvas canvas, MapView mapView, boolean shadow, long when) {
 		Projection projection = mapView.getProjection();
 		if (shadow == false) {
 
@@ -57,7 +55,7 @@ public class MapOverlay extends Overlay {
 			canvas.drawPath(path, mPaint);
 			Point screenPts = new Point();
 			mapView.getProjection().toPixels(centerPoint, screenPts);
-			canvas.drawBitmap(severityIcon, screenPts.x-severityIcon.getWidth()/2, screenPts.y-severityIcon.getHeight(), null);
+			canvas.drawBitmap(severityIcon, screenPts.x - severityIcon.getWidth() / 2, screenPts.y - severityIcon.getHeight(), null);
 		}
 		return super.draw(canvas, mapView, shadow, when);
 	}
