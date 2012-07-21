@@ -44,7 +44,9 @@ public class myLocationActivity extends MapActivity {
 	final Context cont = this;
 	final Activity currentActivity = this;
 	private GeoPoint markerPosition;
+	private String markerplacename;
 	private SearchAddressResult sar;
+	private DrawPinOverlay currentPinOverlay;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -52,29 +54,17 @@ public class myLocationActivity extends MapActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mylocation);
 
+		currentPinOverlay = null;
+
 		searchBox1 = (EditText) findViewById(R.id.searchText1);
-
-		searchBox1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-					performSearch();
-					return true;
-				}
-				return false;
-			}
-		});
 
 		mapView = (MapView) findViewById(R.id.mapview1);
 		mapView.setBuiltInZoomControls(true);
 		LinearLayout zoomLayout = (LinearLayout) findViewById(R.id.zoomOption);
 		View zoomView = mapView.getZoomControls();
-
 		zoomLayout.addView(zoomView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		mapView.displayZoomControls(true);
-
 		mapController = mapView.getController();
-
 		mapOverlays = mapView.getOverlays();
 		myLocOverlay = new MyLocationOverlay(this, mapView);
 		myLocOverlay.enableMyLocation();
@@ -92,6 +82,10 @@ public class myLocationActivity extends MapActivity {
 			public void onClick(View v) {
 				mapController.setZoom(17);
 				mapController.animateTo(myLocOverlay.getMyLocation());
+				if (currentPinOverlay != null) {
+					mapOverlays.remove(currentPinOverlay);
+					currentPinOverlay = null;
+				}
 			}
 		});
 
@@ -101,7 +95,23 @@ public class myLocationActivity extends MapActivity {
 				Intent newPlaceIntent = new Intent(cont, newPlaceActivity.class);
 				newPlaceIntent.putExtra("latitude", markerPosition.getLatitudeE6());
 				newPlaceIntent.putExtra("longitude", markerPosition.getLongitudeE6());
+				newPlaceIntent.putExtra("name", markerplacename);
 				startActivity(newPlaceIntent);
+			}
+		});
+
+		searchBox1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+					performSearch();
+					if (currentPinOverlay != null) {
+						mapOverlays.remove(currentPinOverlay);
+						currentPinOverlay = null;
+					}
+					return true;
+				}
+				return false;
 			}
 		});
 
@@ -112,7 +122,6 @@ public class myLocationActivity extends MapActivity {
 			e.printStackTrace();
 			Log.v("cutomer data: ", e.getMessage());
 		}
-
 		for (int i = 0; i < cd.getOpenReports().size(); i++) {
 			int severity = cd.getOpenReports().get(i).getSeverity();
 			ArrayList<GeoPoint> affected = new ArrayList<GeoPoint>();
@@ -165,9 +174,11 @@ public class myLocationActivity extends MapActivity {
 	public void focusMapView(double latitude, double longitude) {
 		GeoPoint tempPoint = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
 		Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.didyouknow);
-		mapOverlays.add(new DrawPinOverlay(tempPoint, bmp));
+		currentPinOverlay = new DrawPinOverlay(tempPoint, bmp);
+		mapOverlays.add(currentPinOverlay);
 		mapController.setZoom(17);
 		mapController.animateTo(tempPoint);
+		markerPosition = tempPoint;
 	}
 
 }
