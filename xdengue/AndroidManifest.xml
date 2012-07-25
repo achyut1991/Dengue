@@ -10,12 +10,10 @@
     
     <application
         android:icon="@drawable/xdenguicon57x57"
-        android:label="@string/app_name" 
         android:theme="@style/CustomTheme"
         android:debuggable="true"
         android:name="com.smartcommunities.xdengue.XdengueGlobalState">
         <activity
-            android:label="@string/app_name"
             android:name=".XdengueActivity" >
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
@@ -23,20 +21,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		<activity android:name="homeActivity" android:label="X-Dengue" android:launchMode="standard"></activity>
-        <activity android:name="aboutUsActivity" android:label="About X-Dengue" android:launchMode="standard"></activity>
-        <activity android:name="preventionActivity" android:label="Dengue Prevention" android:launchMode="standard"></activity>
+		<activity android:name="homeActivity" android:launchMode="standard"></activity>
+        <activity android:name="aboutUsActivity" android:launchMode="standard"></activity>
+        <activity android:name="preventionActivity" android:launchMode="standard"></activity>
         <activity android:name="MyPlacesActivity" android:launchMode="standard"></activity>
-        <activity android:label="Personal Protection" android:name="personalProtectionActivity" android:launchMode="standard"></activity>
-        <activity android:launchMode="standard" android:label="Breeding Sites" android:name="breedingSitesActivity"></activity>
-        <activity android:launchMode="standard" android:label="Mozzie Wipe-out" android:name="mozzieWipeoutActivity"></activity>
-        <activity android:name="loginActivity" android:windowSoftInputMode="adjustPan" android:launchMode="standard" android:label="login"></activity>
-        <activity android:name="registerActivity" android:launchMode="standard" android:label="register"></activity>
+        <activity android:name="personalProtectionActivity" android:launchMode="standard"></activity>
+        <activity android:launchMode="standard" android:name="breedingSitesActivity"></activity>
+        <activity android:launchMode="standard" android:name="mozzieWipeoutActivity"></activity>
+        <activity android:name="loginActivity" android:windowSoftInputMode="adjustPan" android:launchMode="standard"></activity>
+        <activity android:name="registerActivity" android:launchMode="standard"></activity>
         <activity android:name="myLocationActivity" android:launchMode="standard"></activity>
         <uses-library android:name="com.google.android.maps" />
         <activity android:name="customLogoActivity"></activity>
-        <activity android:launchMode="standard" android:name="hotSpotsActivity" android:label="Hot Spots"></activity>
+        <activity android:launchMode="standard" android:name="hotSpotsActivity"></activity>
         <activity android:name="newPlaceActivity" android:launchMode="standard"></activity>
+        <activity android:name="newPlaceAddressActivity" android:launchMode="standard"></activity>
+        <activity android:name="newPlaceMobileListActivity" android:launchMode="standard"></activity>
     </application>
 
 </manifest>

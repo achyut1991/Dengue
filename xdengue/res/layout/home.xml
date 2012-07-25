@@ -6,11 +6,14 @@
     android:orientation="vertical" >
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/home_searchText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp" >
-    </EditText>
+        android:drawableLeft="@android:drawable/ic_menu_search"
+        android:hint="Search address for dengue nearby"
+        android:inputType="text"
+        android:textSize="15sp"
+        android:imeOptions="actionSearch" />
 
     <ScrollView
         android:id="@+id/scrollview1"

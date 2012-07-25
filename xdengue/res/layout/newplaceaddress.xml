@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/navaigationbackground"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/newplaceaddress_searchText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@android:drawable/ic_menu_search"
+        android:hint="Search address for dengue nearby"
+        android:inputType="text"
+        android:textSize="15sp"
+        android:imeOptions="actionSearch" >
+
+        <requestFocus />
+    </EditText>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.maps.MapView
+            android:id="@+id/newpalceaddress_mapview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:apiKey="04rUNO0cNW4QMA-MCH6FGPEOLlVFumcWJOTitVA"
+            android:clickable="true"
+            android:enabled="true" />
+
+        <LinearLayout
+            android:id="@+id/newplaceaddress_zoomOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</LinearLayout>
