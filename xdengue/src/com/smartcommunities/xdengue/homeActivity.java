@@ -51,7 +51,7 @@ public class homeActivity extends Activity {
 		logoButtonLeft.setBackgroundResource(android.R.drawable.ic_menu_preferences);
 		logoButtonLeft.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-
+				startActivity(new Intent(cont, SettingsActivity.class));
 			}
 		});
 
@@ -96,26 +96,29 @@ public class homeActivity extends Activity {
 				startActivity(new Intent(cont, MyPlacesActivity.class));
 			}
 		});
-		
+
 		tellAFriendButton.setOnClickListener(new View.OnClickListener() {
-			
+
 			public void onClick(View v) {
-				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);  
-				  
-				String aEmailList[] = { "achyut1991@gmail.com" };  
-				String aEmailCCList[] = { "seshasendhil@gmail.com"};  
-				String aEmailBCCList[] = { "user5@fakehost.com" };  
-				  
-				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList);  
-				emailIntent.putExtra(android.content.Intent.EXTRA_CC, aEmailCCList);  
-				emailIntent.putExtra(android.content.Intent.EXTRA_BCC, aEmailBCCList);  
-				  
-				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "My subject");  
-				  
-				emailIntent.setType("plain/text");  
-				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Check this out... X-Dengue is a new free service in Singapore that alerts you via SMS when a Dengue cluster is nearby. Just add your favourite places like home, work, school or parents to get an alert if a Dengue cluster is near you or your loved ones.");  
-				  
-				startActivity(emailIntent);  
+				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+				String aEmailList[] = { "achyut1991@gmail.com" };
+				String aEmailCCList[] = { "seshasendhil@gmail.com" };
+				String aEmailBCCList[] = { "user5@fakehost.com" };
+
+				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList);
+				emailIntent.putExtra(android.content.Intent.EXTRA_CC, aEmailCCList);
+				emailIntent.putExtra(android.content.Intent.EXTRA_BCC, aEmailBCCList);
+
+				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "My subject");
+
+				emailIntent.setType("plain/text");
+				emailIntent
+						.putExtra(
+								android.content.Intent.EXTRA_TEXT,
+								"Check this out... X-Dengue is a new free service in Singapore that alerts you via SMS when a Dengue cluster is nearby. Just add your favourite places like home, work, school or parents to get an alert if a Dengue cluster is near you or your loved ones.");
+
+				startActivity(emailIntent);
 			}
 		});
 
