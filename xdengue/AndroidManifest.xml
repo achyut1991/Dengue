@@ -5,40 +5,113 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="8" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    
+
     <application
-        android:icon="@drawable/xdenguicon57x57"
-		android:label="@string/app_name" 
-        android:theme="@style/CustomTheme"
+        android:name="com.smartcommunities.xdengue.XdengueGlobalState"
         android:debuggable="true"
-        android:name="com.smartcommunities.xdengue.XdengueGlobalState">
+        android:icon="@drawable/xdenguicon57x57"
+        android:label="@string/app_name"
+        android:theme="@style/CustomTheme" >
         <activity
-        	android:label="@string/app_name"
-            android:name=".XdengueActivity" >
-            <intent-filter >
+            android:name=".XdengueActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		<activity android:name="homeActivity" android:launchMode="standard"></activity>
-        <activity android:name="aboutUsActivity" android:launchMode="standard"></activity>
-        <activity android:name="preventionActivity" android:launchMode="standard"></activity>
-        <activity android:name="MyPlacesActivity" android:launchMode="standard"></activity>
-        <activity android:name="personalProtectionActivity" android:launchMode="standard"></activity>
-        <activity android:launchMode="standard" android:name="breedingSitesActivity"></activity>
-        <activity android:launchMode="standard" android:name="mozzieWipeoutActivity"></activity>
-        <activity android:name="loginActivity" android:windowSoftInputMode="adjustPan" android:launchMode="standard"></activity>
-        <activity android:name="registerActivity" android:launchMode="standard"></activity>
-        <activity android:name="myLocationActivity" android:launchMode="standard"></activity>
+        <activity
+            android:name="homeActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="aboutUsActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="preventionActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="MyPlacesActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="personalProtectionActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="breedingSitesActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="mozzieWipeoutActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="loginActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="registerActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="myLocationActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+
         <uses-library android:name="com.google.android.maps" />
-        <activity android:name="customLogoActivity"></activity>
-        <activity android:launchMode="standard" android:name="hotSpotsActivity"></activity>
-        <activity android:name="newPlaceActivity" android:launchMode="standard"></activity>
-        <activity android:name="newPlaceAddressActivity" android:launchMode="standard"></activity>
-        <activity android:name="newPlaceMobileListActivity" android:launchMode="standard"></activity>
+
+        <activity
+            android:name="hotSpotsActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="newPlaceActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="newPlaceAddressActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="newPlaceMobileListActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity android:name="SettingsActivity"></activity>
     </application>
 
 </manifest>

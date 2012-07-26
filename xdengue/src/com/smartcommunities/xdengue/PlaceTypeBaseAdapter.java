@@ -1,5 +1,6 @@
 package com.smartcommunities.xdengue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -10,61 +11,58 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.smartcommunities.xdengue.dataModel.Place;
 import com.smartcommunities.xdengue.dataModel.PlaceTypeUtil;
 
-public class MyPlacesBaseAdapter extends BaseAdapter {
-	private static List<Place> myPlacesList;
+public class PlaceTypeBaseAdapter extends BaseAdapter {
+	private final List<String> placeType;
 	private final Context context;
 
 	private final LayoutInflater mInflater;
 
-	public MyPlacesBaseAdapter(Context context, List<Place> myPlacesList) {
-		this.myPlacesList = myPlacesList;
+	public PlaceTypeBaseAdapter(Context context) {
+		this.placeType = new ArrayList<String>();
+		this.placeType.addAll(PlaceTypeUtil.getPlaceTypes().keySet());
 		this.context = context;
 		mInflater = LayoutInflater.from(context);
 	}
 
 	public int getCount() {
-		return myPlacesList.size();
+		return placeType.size();
 	}
 
 	public Object getItem(int position) {
-		return myPlacesList.get(position);
+		return placeType.get(position);
 	}
 
 	public long getItemId(int position) {
-	return position;
+		return position;
 	}
 
 	public void removeItem(int position) {
-		myPlacesList.remove(position);
+		placeType.remove(position);
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.myplacesitem, null);
+			convertView = mInflater.inflate(R.layout.placetypeitem, null);
 			holder = new ViewHolder();
-			holder.placeName = (TextView) convertView.findViewById(R.id.placename);
-			holder.placeAddress = (TextView) convertView.findViewById(R.id.placeaddress);
-			holder.icon = (ImageView) convertView.findViewById(R.id.myplaceitemicon);
+			holder.placeTypeName = (TextView) convertView.findViewById(R.id.placetype);
+			holder.icon = (ImageView) convertView.findViewById(R.id.placetypeitemicon);
 
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.placeName.setText(myPlacesList.get(position).getSynonym());
-		holder.placeAddress.setText(myPlacesList.get(position).getLocation().getAddress());
-		holder.icon.setImageResource(PlaceTypeUtil.getIconId(myPlacesList.get(position).getIconName()));
+		holder.placeTypeName.setText(PlaceTypeUtil.getTypeNameId(placeType.get(position)));
+		holder.icon.setImageResource(PlaceTypeUtil.getIconId(placeType.get(position)));
 
 		return convertView;
 	}
 
 	static class ViewHolder {
-		TextView placeName;
+		TextView placeTypeName;
 		ImageView icon;
-		TextView placeAddress;
 	}
 
 }

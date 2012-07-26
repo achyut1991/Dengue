@@ -26,6 +26,7 @@ import com.google.android.maps.Overlay;
 import com.google.gson.Gson;
 import com.smartcommunities.xdengue.DrawPinOverlay;
 import com.smartcommunities.xdengue.R;
+import com.smartcommunities.xdengue.XdengueGlobalState;
 import com.smartcommunities.xdengue.myLocationActivity;
 import com.smartcommunities.xdengue.dataModel.SearchAddressResult;
 
@@ -98,6 +99,7 @@ public class SearchAddressTask extends AsyncTask<String, Void, String> {
 			JSONObject json = new JSONObject(result);
 			Gson gson = new Gson();
 			sar = gson.fromJson(result, SearchAddressResult.class);
+			((XdengueGlobalState) callingActivity.getApplication()).setSearchAddressResult(sar);
 
 			System.out.println(sar.getStatus());
 			System.out.println(sar.getGeocodingResult().getFormatted_address());
