@@ -15,103 +15,10 @@
         android:textSize="15sp"
         android:imeOptions="actionSearch" />
 
-    <ScrollView
-        android:id="@+id/scrollview1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <LinearLayout
-            android:id="@+id/linearlayout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <LinearLayout
-                android:id="@+id/linearlayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:id="@+id/imageview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/didyouknow" />
-
-                <TextView
-                    android:id="@+id/textview1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/didyouknowlabel"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/didyouknow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/didyouknowcontent"
-                android:textColor="@color/white" />
-
-            <LinearLayout
-                android:id="@+id/linearlayout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal" >
-
-                <ImageButton
-                    android:id="@+id/myLocationButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2.5dp"
-                    android:background="@drawable/mylocationbutton" />
-
-                <ImageButton
-                    android:id="@+id/myPlacesButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2.5dp"
-                    android:background="@drawable/myplacesbutton" />
-
-                <ImageButton
-                    android:id="@+id/hotSpotsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2.5dp"
-                    android:background="@drawable/hotspotsbutton" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearlayout4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal" >
-
-                <ImageButton
-                    android:id="@+id/preventionButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2.5dp"
-                    android:background="@drawable/preventionbutton" />
-
-                <ImageButton
-                    android:id="@+id/tellAFriendButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2.5dp"
-                    android:background="@drawable/tellafriendbutton" />
-
-                <ImageButton
-                    android:id="@+id/aboutUsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2.5dp"
-                    android:background="@drawable/aboutusbutton" />
-            </LinearLayout>
-        </LinearLayout>
-
-    </ScrollView>
+    <com.smartcommunities.xdengue.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/homelist"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:cacheColorHint="@android:color/transparent" />
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.smartcommunities.xdengue;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,23 +10,26 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.smartcommunities.xdengue.dataModel.CustomerData;
+import com.smartcommunities.xdengue.net.LoginTask;
 import com.smartcommunities.xdengue.net.SearchAddressTask;
+import com.smartcommunities.xdengue.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.smartcommunities.xdengue.pulltorefresh.library.PullToRefreshListView;
 
 public class homeActivity extends Activity {
 
 	private EditText searchBox;
+	private PullToRefreshListView homeListViewWrapper;
 	final Context cont = this;
 	final Activity currentActivity = this;
 
@@ -47,59 +51,39 @@ public class homeActivity extends Activity {
 			Log.v("cutomer data: ", e.getMessage());
 		}
 		if (cd != null) {
-			((TextView) findViewById(R.id.didyouknow)).setText(cd.getDidYouKnow());
+			homeListViewWrapper = (PullToRefreshListView) findViewById(R.id.homelist);
+			ListView homeListView = homeListViewWrapper.getRefreshableView();
+			List<String> didyouKnow = new ArrayList<String>();
+			didyouKnow.add(cd.getDidYouKnow());
+			HomeBaseAdapter homeBaseAdapter = new HomeBaseAdapter(cont, didyouKnow);
+			homeListView.setAdapter(homeBaseAdapter);
+
+			homeListViewWrapper.setOnRefreshListener(new OnRefreshListener() {
+				public void onRefresh() {
+					homeListViewWrapper.setLastUpdatedLabel(DateUtils.formatDateTime(getApplicationContext(),
+							System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE
+									| DateUtils.FORMAT_ABBREV_ALL));
+
+					// Do work to refresh the list here.
+					String emailAddress = XdenguePreferences.readString(cont, XdenguePreferences.EMAIL, "");
+					String passwordString = XdenguePreferences.readString(cont, XdenguePreferences.PASS, "");
+
+					if (emailAddress.length() != 0 && passwordString.length() != 0) {
+						List<NameValuePair> params = new LinkedList<NameValuePair>();
+						String url = "http://www.x-dengue.com/mobilev1/FullCustomerData";
+						params.add(new BasicNameValuePair("emailAddress", emailAddress));
+						params.add(new BasicNameValuePair("password", passwordString));
+						String paramString = URLEncodedUtils.format(params, "utf-8");
+						url += "?" + paramString;
+						LoginTask loginTask = new LoginTask(cont, currentActivity, homeListViewWrapper);
+						loginTask.execute(url);
+					} else {
+						homeListViewWrapper.onRefreshComplete();
+					}
+				}
+			});
 		}
 		final Context cont = this;
-		ImageButton aboutUsButton = (ImageButton) findViewById(R.id.aboutUsButton);
-		ImageButton preventionButton = (ImageButton) findViewById(R.id.preventionButton);
-		ImageButton myLocationButton = (ImageButton) findViewById(R.id.myLocationButton);
-		ImageButton myPlacesButton = (ImageButton) findViewById(R.id.myPlacesButton);
-		ImageButton tellAFriendButton = (ImageButton) findViewById(R.id.tellAFriendButton);
-		aboutUsButton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				startActivity(new Intent(cont, aboutUsActivity.class));
-			}
-		});
-
-		preventionButton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				startActivity(new Intent(cont, preventionActivity.class));
-			}
-		});
-
-		myLocationButton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				startActivity(new Intent(cont, myLocationActivity.class));
-			}
-		});
-
-		myPlacesButton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				startActivity(new Intent(cont, MyPlacesActivity.class));
-			}
-		});
-		
-		tellAFriendButton.setOnClickListener(new View.OnClickListener() {
-			
-			public void onClick(View v) {
-				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);  
-				  
-				String aEmailList[] = { "achyut1991@gmail.com" };  
-				String aEmailCCList[] = { "seshasendhil@gmail.com"};  
-				String aEmailBCCList[] = { "user5@fakehost.com" };  
-				  
-				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList);  
-				emailIntent.putExtra(android.content.Intent.EXTRA_CC, aEmailCCList);  
-				emailIntent.putExtra(android.content.Intent.EXTRA_BCC, aEmailBCCList);  
-				  
-				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "My subject");  
-				  
-				emailIntent.setType("plain/text");  
-				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Check this out... X-Dengue is a new free service in Singapore that alerts you via SMS when a Dengue cluster is nearby. Just add your favourite places like home, work, school or parents to get an alert if a Dengue cluster is near you or your loved ones.");  
-				  
-				startActivity(emailIntent);  
-			}
-		});
 
 		searchBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 

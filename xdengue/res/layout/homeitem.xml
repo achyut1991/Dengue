@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/homeitemlinearlayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/homeitemlinearlayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/homeitemimageview1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/didyouknow" />
+
+        <TextView
+            android:id="@+id/homeitemtextview1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/didyouknowlabel"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/homeitemdidyouknow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/didyouknowcontent"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/homeitemlinearlayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/homeitemmyLocationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2.5dp"
+            android:background="@drawable/mylocationbutton" />
+
+        <ImageButton
+            android:id="@+id/homeitemmyPlacesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2.5dp"
+            android:background="@drawable/myplacesbutton" />
+
+        <ImageButton
+            android:id="@+id/homeitemhotSpotsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2.5dp"
+            android:background="@drawable/hotspotsbutton" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/homeitemlinearlayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/homeitempreventionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2.5dp"
+            android:background="@drawable/preventionbutton" />
+
+        <ImageButton
+            android:id="@+id/homeitemtellAFriendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2.5dp"
+            android:background="@drawable/tellafriendbutton" />
+
+        <ImageButton
+            android:id="@+id/homeitemaboutUsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2.5dp"
+            android:background="@drawable/aboutusbutton" />
+    </LinearLayout>
+
+</LinearLayout>
