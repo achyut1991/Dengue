@@ -107,7 +107,7 @@ public class LoginTask extends AsyncTask<String, Void, String> {
 				} else {
 					List<String> didyouKnow = new ArrayList<String>();
 					didyouKnow.add(cd.getDidYouKnow());
-					HomeBaseAdapter homeBaseAdapter = new HomeBaseAdapter(context, didyouKnow);
+					HomeBaseAdapter homeBaseAdapter = new HomeBaseAdapter(context, didyouKnow, callingActivity);
 					homeListViewWrapper.getRefreshableView().setAdapter(homeBaseAdapter);
 					homeListViewWrapper.onRefreshComplete();
 				}

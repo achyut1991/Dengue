@@ -76,13 +76,14 @@ public class homeActivity extends Activity {
 			ListView homeListView = homeListViewWrapper.getRefreshableView();
 			List<String> didyouKnow = new ArrayList<String>();
 			didyouKnow.add(cd.getDidYouKnow());
-			HomeBaseAdapter homeBaseAdapter = new HomeBaseAdapter(cont, didyouKnow);
+			HomeBaseAdapter homeBaseAdapter = new HomeBaseAdapter(cont, didyouKnow, this);
 			homeListView.setAdapter(homeBaseAdapter);
 
 			homeListViewWrapper.setOnRefreshListener(new OnRefreshListener() {
 				public void onRefresh() {
-					homeListViewWrapper.setLastUpdatedLabel(DateUtils.formatDateTime(getApplicationContext(), System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE
-							| DateUtils.FORMAT_ABBREV_ALL));
+					homeListViewWrapper.setLastUpdatedLabel(DateUtils.formatDateTime(getApplicationContext(),
+							System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE
+									| DateUtils.FORMAT_ABBREV_ALL));
 
 					// Do work to refresh the list here.
 					String emailAddress = XdenguePreferences.readString(cont, XdenguePreferences.EMAIL, "");
