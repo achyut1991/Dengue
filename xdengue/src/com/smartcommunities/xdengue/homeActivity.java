@@ -10,6 +10,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -80,9 +81,8 @@ public class homeActivity extends Activity {
 
 			homeListViewWrapper.setOnRefreshListener(new OnRefreshListener() {
 				public void onRefresh() {
-					homeListViewWrapper.setLastUpdatedLabel(DateUtils.formatDateTime(getApplicationContext(),
-							System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE
-									| DateUtils.FORMAT_ABBREV_ALL));
+					homeListViewWrapper.setLastUpdatedLabel(DateUtils.formatDateTime(getApplicationContext(), System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE
+							| DateUtils.FORMAT_ABBREV_ALL));
 
 					// Do work to refresh the list here.
 					String emailAddress = XdenguePreferences.readString(cont, XdenguePreferences.EMAIL, "");
