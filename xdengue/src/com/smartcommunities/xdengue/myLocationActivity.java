@@ -70,12 +70,31 @@ public class myLocationActivity extends MapActivity {
 		myLocOverlay.enableMyLocation();
 		mapOverlays.add(myLocOverlay);
 
-		myLocOverlay.runOnFirstFix(new Runnable() {
-			public void run() {
-				mapController.setZoom(17);
-				mapController.animateTo(myLocOverlay.getMyLocation());
-			}
-		});
+		Bundle extras = getIntent().getExtras();
+
+		if (extras != null) {
+			final GeoPoint temp = new GeoPoint((int) (extras.getDouble("latitude") * 1E6), (int) (extras.getDouble("longitude") * 1E6));
+			String tempName = extras.getString("name");
+			Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.didyouknow);
+			currentPinOverlay = new DrawPinOverlay(temp, bmp);
+			mapOverlays.add(currentPinOverlay);
+			markerPosition = temp;
+			markerplacename = tempName;
+			myLocOverlay.runOnFirstFix(new Runnable() {
+				public void run() {
+					mapController.setZoom(17);
+					mapController.animateTo(temp);
+				}
+			});
+
+		} else {
+			myLocOverlay.runOnFirstFix(new Runnable() {
+				public void run() {
+					mapController.setZoom(17);
+					mapController.animateTo(myLocOverlay.getMyLocation());
+				}
+			});
+		}
 
 		Button centerButton = (Button) findViewById(R.id.centerButton);
 		centerButton.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +111,10 @@ public class myLocationActivity extends MapActivity {
 		Button newPlaceButton = (Button) findViewById(R.id.newPlaceButton);
 		newPlaceButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				sar = ((XdengueGlobalState) getApplication()).getSearchAddressResult();
+				GeoPoint temp = new GeoPoint((int) (sar.getGeocodingResult().getGeometry().getLocation().getLat() * 1E6), (int) (sar.getGeocodingResult().getGeometry().getLocation().getLng() * 1E6));
+				markerPosition = temp;
+				markerplacename = sar.getGeocodingResult().getFormatted_address();
 				Intent newPlaceIntent = new Intent(cont, newPlaceActivity.class);
 				newPlaceIntent.putExtra("latitude", markerPosition.getLatitudeE6());
 				newPlaceIntent.putExtra("longitude", markerPosition.getLongitudeE6());
@@ -167,18 +190,8 @@ public class myLocationActivity extends MapActivity {
 		String paramString = URLEncodedUtils.format(params, "utf-8");
 		url += "?" + paramString;
 		System.out.println(url);
-		SearchAddressTask searchTask = new SearchAddressTask(cont, currentActivity);
+		SearchAddressTask searchTask = new SearchAddressTask(cont, currentActivity, currentPinOverlay, mapController, mapOverlays);
 		searchTask.execute(url);
-	}
-
-	public void focusMapView(double latitude, double longitude) {
-		GeoPoint tempPoint = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
-		Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.didyouknow);
-		currentPinOverlay = new DrawPinOverlay(tempPoint, bmp);
-		mapOverlays.add(currentPinOverlay);
-		mapController.setZoom(17);
-		mapController.animateTo(tempPoint);
-		markerPosition = tempPoint;
 	}
 
 }

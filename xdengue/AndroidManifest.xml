@@ -10,10 +10,12 @@
     
     <application
         android:icon="@drawable/xdenguicon57x57"
+		android:label="@string/app_name" 
         android:theme="@style/CustomTheme"
         android:debuggable="true"
         android:name="com.smartcommunities.xdengue.XdengueGlobalState">
         <activity
+        	android:label="@string/app_name"
             android:name=".XdengueActivity" >
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />

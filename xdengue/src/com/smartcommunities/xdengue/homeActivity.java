@@ -23,7 +23,7 @@ import android.widget.TextView;
 import com.smartcommunities.xdengue.dataModel.CustomerData;
 import com.smartcommunities.xdengue.net.SearchAddressTask;
 
-public class homeActivity extends customLogoActivity {
+public class homeActivity extends Activity {
 
 	private EditText searchBox;
 	final Context cont = this;
@@ -114,18 +114,6 @@ public class homeActivity extends customLogoActivity {
 		System.out.println(url);
 		SearchAddressTask searchTask = new SearchAddressTask(cont, currentActivity);
 		searchTask.execute(url);
-	}
-
-	public void focusMapView(double latitude, double longitude, String name) {
-
-		Intent intent = new Intent(cont, myLocationActivity.class);
-		Bundle b = new Bundle();
-		b.putDouble("latitude", latitude);
-		b.putDouble("longitude", longitude);
-		b.putString("addressname", name);
-		intent.putExtras(b);
-		startActivity(intent);
-
 	}
 
 }

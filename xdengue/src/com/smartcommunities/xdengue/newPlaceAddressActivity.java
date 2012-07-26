@@ -33,6 +33,7 @@ import com.google.android.maps.MapView.LayoutParams;
 import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
 import com.smartcommunities.xdengue.dataModel.CustomerData;
+import com.smartcommunities.xdengue.dataModel.SearchAddressResult;
 import com.smartcommunities.xdengue.net.SearchAddressTask;
 
 public class newPlaceAddressActivity extends MapActivity {
@@ -49,8 +50,9 @@ public class newPlaceAddressActivity extends MapActivity {
 	private List<Overlay> mapOverlays;
 	final Context cont = this;
 	final Activity currentActivity = this;
-	GeoPoint markerPoint;
-	String markerName;
+	GeoPoint markerPosition;
+	private SearchAddressResult sar;
+	String markerplacename;
 	private DrawPinOverlay currentPinOverlay;
 
 	@Override
@@ -60,7 +62,7 @@ public class newPlaceAddressActivity extends MapActivity {
 		setContentView(R.layout.newplaceaddress);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.logo);
 
-		markerPoint = null;
+		markerPosition = null;
 		currentPinOverlay = null;
 
 		logoButtonLeft = (ImageButton) findViewById(R.id.logoImageButtonLeft);
@@ -74,11 +76,15 @@ public class newPlaceAddressActivity extends MapActivity {
 		logoButtonRight.setBackgroundResource(R.drawable.mosquitored);
 		logoButtonRight.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				sar = ((XdengueGlobalState) getApplication()).getSearchAddressResult();
+				GeoPoint temp = new GeoPoint((int) (sar.getGeocodingResult().getGeometry().getLocation().getLat() * 1E6), (int) (sar.getGeocodingResult().getGeometry().getLocation().getLng() * 1E6));
+				markerPosition = temp;
+				markerplacename = sar.getGeocodingResult().getFormatted_address();
 				Intent intent = new Intent();
 				Bundle b = new Bundle();
-				b.putDouble("latitude", markerPoint.getLatitudeE6());
-				b.putDouble("longitude", markerPoint.getLongitudeE6());
-				b.putString("addressname", markerName);
+				b.putDouble("latitude", markerPosition.getLatitudeE6());
+				b.putDouble("longitude", markerPosition.getLongitudeE6());
+				b.putString("addressname", markerplacename);
 				intent.putExtras(b);
 				setResult(SUCCESS_RETURN_CODE, intent);
 				finish();
@@ -170,18 +176,18 @@ public class newPlaceAddressActivity extends MapActivity {
 		String paramString = URLEncodedUtils.format(params, "utf-8");
 		url += "?" + paramString;
 		System.out.println(url);
-		SearchAddressTask searchTask = new SearchAddressTask(cont, currentActivity);
+		SearchAddressTask searchTask = new SearchAddressTask(cont, currentActivity, currentPinOverlay, mapController, mapOverlays);
 		searchTask.execute(url);
 	}
 
-	public void focusMapView(double latitude, double longitude) {
+	public void focusMapView(double latitude, double longitude, String name) {
 		GeoPoint tempPoint = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
 		Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.didyouknow);
 		currentPinOverlay = new DrawPinOverlay(tempPoint, bmp);
 		mapOverlays.add(currentPinOverlay);
 		mapController.setZoom(17);
 		mapController.animateTo(tempPoint);
-		markerPoint = tempPoint;
+		markerPosition = tempPoint;
 	}
 
 }
