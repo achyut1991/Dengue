@@ -1,12 +1,14 @@
 package com.smartcommunities.xdengue;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
@@ -18,7 +20,9 @@ public class newPlaceActivity extends Activity {
 	private TextView logoText;
 	private GeoPoint markerPosition = null;
 	private String markerAddress = null;
-	private EditText placeType, placeName, placeAddress, placeMobiles;
+	private EditText placeName, placeAddress, placeMobiles;
+	private Spinner placeType;
+	private final Context context = this;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +53,10 @@ public class newPlaceActivity extends Activity {
 			markerAddress = extras.getString("name");
 		}
 
-		placeType = (EditText) findViewById(R.id.placetype);
+		placeType = (Spinner) findViewById(R.id.placetype);
+		PlaceTypeBaseAdapter adapter = new PlaceTypeBaseAdapter(context);
+		placeType.setAdapter(adapter);
+
 		placeName = (EditText) findViewById(R.id.placename);
 		placeAddress = (EditText) findViewById(R.id.placeaddress);
 		placeMobiles = (EditText) findViewById(R.id.placemobiles);
@@ -58,5 +65,4 @@ public class newPlaceActivity extends Activity {
 			placeAddress.setText(markerAddress);
 		}
 	}
-
 }

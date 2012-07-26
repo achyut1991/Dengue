@@ -18,6 +18,8 @@ import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.smartcommunities.xdengue.dataModel.CustomerData;
@@ -30,6 +32,9 @@ public class homeActivity extends Activity {
 
 	private EditText searchBox;
 	private PullToRefreshListView homeListViewWrapper;
+	private ImageButton logoButtonLeft, logoButtonRight;
+	private ImageView logoHeader;
+	private TextView logoText;
 	final Context cont = this;
 	final Activity currentActivity = this;
 
@@ -40,6 +45,20 @@ public class homeActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.home);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.logo);
+
+		logoButtonLeft = (ImageButton) findViewById(R.id.logoImageButtonLeft);
+		logoButtonRight = (ImageButton) findViewById(R.id.logoImageButtonRight);
+		logoHeader = (ImageView) findViewById(R.id.header);
+		logoText = (TextView) findViewById(R.id.logoText);
+
+		logoButtonRight.setVisibility(4);
+		logoText.setVisibility(4);
+		logoButtonLeft.setBackgroundResource(android.R.drawable.ic_menu_preferences);
+		logoButtonLeft.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+
+			}
+		});
 
 		searchBox = (EditText) findViewById(R.id.home_searchText);
 

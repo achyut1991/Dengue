@@ -11,16 +11,12 @@
         android:layout_margin="5dp"
         android:orientation="vertical" >
 
-        <EditText
+        <Spinner
             android:id="@+id/placetype"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Place Type"
-            android:drawableLeft="@drawable/formvalidationerror"
-            android:inputType="textPersonName" >
-
-            <requestFocus />
-        </EditText>
+            android:prompt="@string/spinnerdefault"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/placename"
@@ -28,15 +24,15 @@
             android:layout_height="wrap_content"
             android:hint="Name"
             android:inputType="textPersonName" />
-        
+
         <EditText
-	        android:id="@+id/placeaddress"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:hint="Address"
-	        android:inputType="textEmailAddress" />
-        
-         <EditText
+            android:id="@+id/placeaddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address"
+            android:inputType="textEmailAddress" />
+
+        <EditText
             android:id="@+id/placemobiles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,6 +46,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal" >
+
         <Button
             android:id="@+id/addPlaceButton"
             android:layout_width="wrap_content"
@@ -57,7 +54,5 @@
             android:layout_gravity="center"
             android:text="Add Place" />
     </LinearLayout>
-
-    
 
 </LinearLayout>
