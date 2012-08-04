@@ -34,7 +34,7 @@ public class MyPlacesBaseAdapter extends BaseAdapter {
 	}
 
 	public long getItemId(int position) {
-	return position;
+		return position;
 	}
 
 	public void removeItem(int position) {
@@ -49,14 +49,23 @@ public class MyPlacesBaseAdapter extends BaseAdapter {
 			holder.placeName = (TextView) convertView.findViewById(R.id.placename);
 			holder.placeAddress = (TextView) convertView.findViewById(R.id.placeaddress);
 			holder.icon = (ImageView) convertView.findViewById(R.id.myplaceitemicon);
+			holder.statusIcon = (ImageView) convertView.findViewById(R.id.myplaceitemstatusicon);
 
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.placeName.setText(myPlacesList.get(position).getSynonym());
-		holder.placeAddress.setText(myPlacesList.get(position).getLocation().getAddress());
-		holder.icon.setImageResource(PlaceTypeUtil.getIconId(myPlacesList.get(position).getIconName()));
+		Place thisPlace = myPlacesList.get(position);
+		if (thisPlace.getPlaceReports().size() != 0) {
+			// Red Zone
+			holder.statusIcon.setImageResource(R.drawable.cross_shield);
+		} else {
+			// Green Zone
+			holder.statusIcon.setImageResource(R.drawable.tick_shield);
+		}
+		holder.placeName.setText(thisPlace.getSynonym());
+		holder.placeAddress.setText(thisPlace.getLocation().getAddress());
+		holder.icon.setImageResource(PlaceTypeUtil.getIconId(thisPlace.getIconName()));
 
 		return convertView;
 	}
@@ -64,6 +73,7 @@ public class MyPlacesBaseAdapter extends BaseAdapter {
 	static class ViewHolder {
 		TextView placeName;
 		ImageView icon;
+		ImageView statusIcon;
 		TextView placeAddress;
 	}
 

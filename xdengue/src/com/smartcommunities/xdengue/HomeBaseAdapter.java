@@ -60,10 +60,12 @@ public class HomeBaseAdapter extends BaseAdapter {
 		}
 		if (((XdengueGlobalState) callingActivity.getApplication()).getCustomerData().getCustomer().isThreat()) {
 			// red over here
-			holder.myPlacesButton.setImageResource(R.drawable.aboutusbutton);
+			holder.myPlacesButton.setImageResource(R.drawable.myplacesredbutton);
+			holder.myLocationButton.setImageResource(R.drawable.mylocationredbutton);
 		} else {
 			// normal here
-			holder.myPlacesButton.setImageResource(R.drawable.myplacesbutton);
+			holder.myPlacesButton.setImageResource(R.drawable.myplacesgreenbutton);
+			holder.myLocationButton.setImageResource(R.drawable.mylocationgreenbutton);
 		}
 		holder.aboutUsButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
