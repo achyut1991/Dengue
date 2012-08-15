@@ -49,7 +49,6 @@ public class MyPlacesBaseAdapter extends BaseAdapter {
 			holder.placeName = (TextView) convertView.findViewById(R.id.placename);
 			holder.placeAddress = (TextView) convertView.findViewById(R.id.placeaddress);
 			holder.icon = (ImageView) convertView.findViewById(R.id.myplaceitemicon);
-			holder.statusIcon = (ImageView) convertView.findViewById(R.id.myplaceitemstatusicon);
 
 			convertView.setTag(holder);
 		} else {
@@ -58,10 +57,10 @@ public class MyPlacesBaseAdapter extends BaseAdapter {
 		Place thisPlace = myPlacesList.get(position);
 		if (thisPlace.getPlaceReports().size() != 0) {
 			// Red Zone
-			holder.statusIcon.setImageResource(R.drawable.cross_shield);
+			holder.placeName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.cross_shield, 0, 0, 0);
 		} else {
 			// Green Zone
-			holder.statusIcon.setImageResource(R.drawable.tick_shield);
+			holder.placeName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tick_shield, 0, 0, 0);
 		}
 		holder.placeName.setText(thisPlace.getSynonym());
 		holder.placeAddress.setText(thisPlace.getLocation().getAddress());
@@ -73,7 +72,6 @@ public class MyPlacesBaseAdapter extends BaseAdapter {
 	static class ViewHolder {
 		TextView placeName;
 		ImageView icon;
-		ImageView statusIcon;
 		TextView placeAddress;
 	}
 

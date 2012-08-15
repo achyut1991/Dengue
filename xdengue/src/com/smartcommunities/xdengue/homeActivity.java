@@ -78,7 +78,6 @@ public class homeActivity extends Activity {
 			didyouKnow.add(cd.getDidYouKnow());
 			HomeBaseAdapter homeBaseAdapter = new HomeBaseAdapter(cont, didyouKnow, this);
 			homeListView.setAdapter(homeBaseAdapter);
-
 			homeListViewWrapper.setOnRefreshListener(new OnRefreshListener() {
 				public void onRefresh() {
 					homeListViewWrapper.setLastUpdatedLabel(DateUtils.formatDateTime(getApplicationContext(),

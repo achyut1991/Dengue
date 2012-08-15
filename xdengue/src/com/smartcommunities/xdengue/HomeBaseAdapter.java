@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class HomeBaseAdapter extends BaseAdapter {
-	private static List<String> homeList;
+	private final List<String> homeList;
 	private final Context context;
 	private final Activity callingActivity;
 

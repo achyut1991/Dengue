@@ -44,8 +44,9 @@ public class MyPlacesActivity extends Activity {
 
 					Toast.makeText(
 							cont,
-							"You have chosen: " + " " + selectedPlace.getSynonym() + " " + selectedPlace.getPlaceType() + " " + position + " "
-									+ cd.getCustomer().getPlaces().get(position).getSynonym(), Toast.LENGTH_LONG).show();
+							"You have chosen: " + " " + selectedPlace.getSynonym() + " " + selectedPlace.getPlaceType() + " "
+									+ position + " " + cd.getCustomer().getPlaces().get(position).getSynonym(), Toast.LENGTH_LONG)
+							.show();
 
 				}
 			});

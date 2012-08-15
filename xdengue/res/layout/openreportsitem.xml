@@ -5,7 +5,7 @@
     android:padding="5dp" >
 
     <ImageView
-        android:id="@+id/myplaceitemicon"
+        android:id="@+id/openreportitemicon"
         android:layout_width="32dp"
         android:layout_height="37dp"
         android:layout_marginLeft="5dp"
@@ -15,24 +15,22 @@
     </ImageView>
 
     <LinearLayout
-        android:id="@+id/myplacetextwrapper"
+        android:id="@+id/openreporttextwrapper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/placename"
+            android:id="@+id/openreportaddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/tick_shield"
-            android:drawablePadding="10dp"
             android:text="@+id/label"
             android:textColor="#000000"
             android:textSize="20sp" >
         </TextView>
 
         <TextView
-            android:id="@+id/placeaddress"
+            android:id="@+id/openreportinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@+id/label"
